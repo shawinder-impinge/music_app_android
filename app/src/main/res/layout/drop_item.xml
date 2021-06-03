@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/text"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:maxLines="1"
+    android:paddingStart="@dimen/margin_20"
+    android:text="fhfhhfhfh"
+    android:background="@drawable/view_line"
+    android:gravity="center_vertical"
+    android:paddingBottom="@dimen/margin_10"
+    android:paddingTop="@dimen/margin_10"
+    android:textColor="@color/app_textcolor"
+    android:ellipsize="end">
+
+
+
+</TextView>

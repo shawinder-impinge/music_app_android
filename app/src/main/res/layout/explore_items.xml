@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_lay"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_5">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/margin110"
+        android:layout_height="@dimen/margin120"
+        app:cardCornerRadius="@dimen/margin_15">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/song_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/dummy" />
+
+            <TextView
+                android:id="@+id/song_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/song_duration"
+                android:layout_marginStart="@dimen/dp8"
+                android:layout_marginBottom="@dimen/margin1"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:text="Claming Anxiety"
+                android:textColor="@color/white"
+                android:textSize="@dimen/very_small_text" />
+
+            <TextView
+                android:id="@+id/song_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/margin_10"
+                android:fontFamily="@font/poppins_regular"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="0dp"
+                android:text="3 minutes"
+                android:textColor="@color/white"
+                android:textSize="@dimen/very_very_small_text" />
+
+            <ImageView
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/margin_5"
+                android:layout_marginTop="@dimen/margin_5"
+                android:layout_marginEnd="@dimen/margin_5"
+                android:src="@drawable/password" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

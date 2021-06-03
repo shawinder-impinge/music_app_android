@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10"
+        app:cardCornerRadius="@dimen/margin_20">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="198dp">
+
+
+            <VideoView
+                android:id="@+id/video_view"
+                android:layout_width="match_parent"
+                android:layout_height="198dp" />
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/video_preview"
+                android:layout_width="match_parent"
+                android:layout_height="198dp"
+                android:scaleType="centerCrop"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="198dp">
+
+                <TextView
+                    android:id="@+id/video_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:text=""
+                    android:textColor="@color/white" />
+
+
+                <ImageView
+                    android:id="@+id/play"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="visible"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:src="@drawable/play_round" />
+
+
+                <ImageView
+                    android:id="@+id/pause"
+                    android:layout_width="@dimen/margin_20"
+                    android:layout_height="@dimen/margin_20"
+                    android:layout_alignParentBottom="true"
+                    android:visibility="invisible"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:src="@drawable/pause" />
+
+
+
+
+
+                <TextView
+                    android:id="@+id/song_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:layout_toEndOf="@+id/pause"
+                    android:text="10 mins."
+                    android:textColor="@color/white" />
+
+
+                <ImageView
+                    android:id="@+id/like"
+                    android:layout_width="@dimen/dp25"
+                    android:layout_height="@dimen/dp25"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/margin_15"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:layout_toStartOf="@+id/share"
+                    android:src="@drawable/heart" />
+
+                <ImageView
+                    android:id="@+id/share"
+                    android:layout_width="@dimen/dp25"
+                    android:layout_height="@dimen/dp25"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/margin_15"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:src="@drawable/share" />
+            </RelativeLayout>
+        </FrameLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

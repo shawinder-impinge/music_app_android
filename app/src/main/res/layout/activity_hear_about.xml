@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".activities.HearAboutActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/personalized_bg"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/cross"
+                android:layout_width="@dimen/margin_20"
+                android:layout_height="@dimen/margin_20"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:src="@drawable/cross" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="@dimen/margin_20"
+                android:layout_marginEnd="@dimen/margin_20"
+                android:fontFamily="@font/poppins_regular"
+                android:text="How did you hear \nabout Soul?"
+                android:textColor="@color/app_color"
+                android:textSize="@dimen/margin_25"
+                android:textStyle="bold" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioGroup
+                    android:id="@+id/radiogroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/radio_awaking"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Awakening Planet"
+                        android:fontFamily="@font/poppins_regular"
+                        android:textColor="@color/app_color"
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_friends"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="friends or family"
+                        android:textColor="@color/app_color"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_woke"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Woke Nation"
+
+                        android:textColor="@color/app_color" />
+
+                    <RadioButton
+                        android:id="@+id/radio_tharapist"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Therapist or health professional"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_moonlight"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="MoonLight Meditations"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_power"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:buttonTint="@color/blue_color"
+                        android:text="PowerThoughts Meditation Club"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_app_store"
+                        android:layout_width="match_parent"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="App store or Google"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_app_zen"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="ZenLifeRelax"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_online"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Online or social media Ad"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_nature"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Nature Healing Society"
+                        android:textColor="@color/app_color"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_astral"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Astral Circle"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_self"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Self Healing Collective"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_personal"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Personal Power Project"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+                    <RadioButton
+                        android:id="@+id/radio_other"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/blue_color"
+                        android:text="Other"
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:fontFamily="@font/poppins_regular"
+
+                        android:textColor="@color/app_color"
+
+                        android:textSize="@dimen/large_text" />
+
+
+                </RadioGroup>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

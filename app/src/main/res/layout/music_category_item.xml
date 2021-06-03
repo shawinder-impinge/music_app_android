@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/category_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_10"
+            android:padding="@dimen/margin_5"
+            android:text=""
+            android:textColor="@color/app_textcolor"
+            android:textSize="@dimen/margin_20"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/viewall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:text="View All"
+            android:textColor="@color/dark_gray"
+            android:textSize="@dimen/normal_text" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/meditation_lay"
+            android:background="@drawable/recycler_bg_image">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sub_category_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

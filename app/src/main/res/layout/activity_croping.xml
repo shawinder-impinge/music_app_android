@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_croping"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_gray">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            app:titleTextAppearance="?android:textAppearanceMedium"
+            app:titleTextColor="@color/white"
+            android:background="@color/app_color"
+            android:layout_height="wrap_content">
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:ellipsize="end"
+            android:visibility="visible"
+            android:textSize="@dimen/large_text"
+            android:layout_marginStart="@dimen/margin_10"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tvtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="Crop Image"
+            android:ellipsize="end"
+            android:visibility="visible"
+            android:textSize="@dimen/large_text"
+            android:textColor="@color/white"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/done"
+            android:paddingLeft="@dimen/margin_10"
+            android:paddingTop="@dimen/margin_10"
+            android:paddingBottom="@dimen/margin_10"
+            android:layout_alignParentEnd="true">
+            <TextView
+                android:id="@+id/tvDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Done"
+                android:ellipsize="end"
+                android:visibility="visible"
+                android:padding="@dimen/margin_5"
+                android:textSize="@dimen/large_text"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/margin_10"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.musicapp.util.cropping.latest_cropper.CropIwaView
+            android:id="@+id/crop_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ci_dynamic_aspect_ratio="true"
+            app:ci_draw_grid="false"
+            app:ci_aspect_ratio_w="16"
+            app:ci_aspect_ratio_h="32"
+            app:ci_initial_position="centerInside"
+            app:ci_crop_shape="rectangle"
+            app:ci_min_crop_width="@dimen/margin_300"
+            app:ci_min_crop_height="@dimen/margin500"
+            app:ci_border_width="@dimen/margin2"
+            app:ci_corner_width="@dimen/margin_5"
+            app:ci_corner_color="@color/blue_color"
+            app:ci_grid_color="@color/app_color"
+            app:ci_overlay_color="#00000000"
+            app:ci_scale_enabled="true"
+            app:ci_translation_enabled="true"
+            android:visibility="gone"
+            />
+
+        <com.musicapp.util.cropping.latest_cropper.CropIwaView
+            android:id="@+id/circle_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ci_dynamic_aspect_ratio="true"
+            app:ci_draw_grid="false"
+            app:ci_aspect_ratio_w="100"
+            app:ci_aspect_ratio_h="100"
+            app:ci_initial_position="centerInside"
+            app:ci_crop_shape="oval"
+            app:ci_min_crop_width="@dimen/margin70"
+            app:ci_min_crop_height="@dimen/margin70"
+            app:ci_border_width="@dimen/margin2"
+            app:ci_overlay_color="#00000000"
+            android:visibility="gone"
+            app:ci_scale_enabled="true"
+            app:ci_translation_enabled="true"
+            />
+
+
+        <com.musicapp.util.cropping.latest_cropper.CropIwaView
+            android:id="@+id/square_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:ci_dynamic_aspect_ratio="true"
+            app:ci_draw_grid="false"
+            app:ci_aspect_ratio_w="300"
+            app:ci_aspect_ratio_h="300"
+            app:ci_initial_position="centerInside"
+            app:ci_crop_shape="rectangle"
+            app:ci_min_crop_width="@dimen/margin200"
+            app:ci_min_crop_height="@dimen/margin200"
+            app:ci_border_width="@dimen/margin2"
+            app:ci_overlay_color="#00000000"
+            android:visibility="gone"
+            app:ci_scale_enabled="true"
+            app:ci_translation_enabled="true"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

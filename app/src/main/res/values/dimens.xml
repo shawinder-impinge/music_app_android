@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_300">300dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="normal_text">14sp</dimen>
+    <dimen name="small_text">12sp</dimen>
+    <dimen name="large_text">16sp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_25">25dp</dimen>
+    <dimen name="margin_50">50dp</dimen>
+    <dimen name="margin_40">40dp</dimen>
+    <dimen name="margin1">1dp</dimen>
+    <dimen name="margin_60">60dp</dimen>
+    <dimen name="margin3">3dp</dimen>
+    <dimen name="margin150">150dp</dimen>
+    <dimen name="margin100">100dp</dimen>
+    <dimen name="margin350">350dp</dimen>
+    <dimen name="margin400">400dp</dimen>
+    <dimen name="margin250">250dp</dimen>
+    <dimen name="margin200">200dp</dimen>
+    <dimen name="margin0">0dp</dimen>
+
+
+
+
+
+
+
+
+
+    <dimen name="margin160">160dp</dimen>
+    <dimen name="margin280">280dp</dimen>
+
+
+    <!--todo for sweet alert-->
+    <dimen name="alert_width">290dp</dimen>
+    <dimen name="common_circle_width">3dp</dimen>
+    <dimen name="progress_circle_radius">34dp</dimen>
+    <dimen name="dp25">25dp</dimen>
+    <dimen name="dp60">60dp</dimen>
+    <dimen name="dp180">180dp</dimen>
+    <dimen name="dp90">90dp</dimen>
+    <dimen name="sp23">23sp</dimen>
+    <dimen name="dp200">200dp</dimen>
+    <dimen name="dp250">250dp</dimen>
+    <dimen name="dp8">8dp</dimen>
+    <dimen name="dp22">22dp</dimen>
+    <dimen name="dp45">45dp</dimen>
+    <dimen name="dp6">6dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="width_title">60dp</dimen>
+    <dimen name="height_title">25dp</dimen>
+    <dimen name="margin80">80dp</dimen>
+    <dimen name="margin19sp">19sp</dimen>
+    <dimen name="margin2">2dp</dimen>
+    <dimen name="margin53">53dp</dimen>
+    <dimen name="margin35">35dp</dimen>
+    <dimen name="margin21">21dp</dimen>
+    <dimen name="very_small_text">10sp</dimen>
+    <dimen name="very_very_small_text">8sp</dimen>
+    <dimen name="extra_large">18sp</dimen>
+    <dimen name="margin120">120dp</dimen>
+    <dimen name="margin70">70dp</dimen>
+    <dimen name="margin12">12dp</dimen>
+    <dimen name="margin500">500dp</dimen>
+
+    <dimen name="cropiwa_default_border_stroke_width">1dp</dimen>
+    <dimen name="cropiwa_default_corner_stroke_width">4dp</dimen>
+    <dimen name="cropiwa_default_grid_stroke_width">1dp</dimen>
+    <dimen name="cropiwa_default_min_height">40dp</dimen>
+    <dimen name="cropiwa_default_min_width">40dp</dimen>
+    <dimen name="margin110">110dp</dimen>
+
+
+</resources>

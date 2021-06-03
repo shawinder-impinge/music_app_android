@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.PrivacyPolicyActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.7"
+            android:background="@color/lite_pink"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/contact_us_bg" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_weight="1.3"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/contact_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="You can use this form to reach out to us in case you are facing any issues with the app or have feedback for us. You can also let us know what new features you would like to see in this app."
+                    android:textColor="@color/app_textcolor"
+                    android:textSize="@dimen/normal_text" />
+
+
+                <RelativeLayout
+                    android:id="@+id/name_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/contact_description"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:background="@drawable/cornor"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/margin_10">
+
+
+                    <ImageView
+                        android:id="@+id/iv_name"
+                        android:layout_width="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_20"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/username" />
+
+                    <EditText
+                        android:id="@+id/et_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:layout_toEndOf="@+id/iv_name"
+                        android:background="@null"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Name"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:padding="@dimen/margin_5"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/email_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name_lay"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:background="@drawable/cornor"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/margin_10">
+
+
+                    <ImageView
+                        android:id="@+id/iv_email"
+                        android:layout_width="@dimen/margin_20"
+                        android:layout_height="@dimen/margin_20"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/mail" />
+
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:layout_toEndOf="@+id/iv_email"
+                        android:background="@null"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Email"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:padding="@dimen/margin_5"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/message_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin120"
+                    android:layout_below="@+id/email_lay"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:background="@drawable/cornor"
+                    android:padding="@dimen/margin_10">
+
+
+                    <ImageView
+                        android:id="@+id/iv_message"
+                        android:layout_width="@dimen/margin_25"
+                        android:layout_height="@dimen/margin_25"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:src="@drawable/description" />
+
+                    <EditText
+                        android:id="@+id/et_message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_5"
+                        android:layout_toEndOf="@+id/iv_message"
+                        android:background="@null"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="Message"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:padding="@dimen/margin_5"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"/>
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/send"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/message_lay"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:background="@drawable/cornor_bg"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:padding="@dimen/margin_15"
+                    android:text="SEND"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/large_text" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <include layout="@layout/transparent_toolbar" />
+
+</RelativeLayout>

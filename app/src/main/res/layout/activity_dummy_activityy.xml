@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/margin_10"
+    android:background="@color/white">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/frame_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/gradiant_bg_image">
+
+                        <LinearLayout
+                            android:id="@+id/today_special_lay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_20"
+                            android:layout_marginTop="180dp"
+                            android:layout_marginEnd="@dimen/margin_20"
+                            android:orientation="vertical"
+                            android:padding="@dimen/margin_10">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_regular"
+                                android:text="Today's Special"
+
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/margin_20"
+                                android:textStyle="bold" />
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/song_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text=""
+
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/normal_text" />
+
+                                <TextView
+                                    android:id="@+id/song_count"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/margin_5"
+                                    android:layout_toEndOf="@+id/song_name"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:text=""
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/normal_text" />
+
+                            </RelativeLayout>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_10"
+                                app:cardCornerRadius="@dimen/margin_20">
+
+
+                                <VideoView
+                                    android:id="@+id/video_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="198dp" />
+
+                                <ImageView
+                                    android:id="@+id/play"
+                                    android:layout_width="@dimen/margin_20"
+                                    android:layout_height="@dimen/margin_20"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/play" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/margin_15"
+                                    android:layout_height="@dimen/margin_15"
+                                    android:layout_gravity="end"
+                                    android:layout_marginTop="@dimen/margin_10"
+                                    android:layout_marginEnd="@dimen/margin_10"
+                                    android:src="@drawable/password" />
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_20"
+                                android:layout_marginBottom="@dimen/margin_10"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <!-- android:background="@drawable/cornor_skiny"-->
+                                <TextView
+                                    android:id="@+id/relax_text"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="@dimen/margin_5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:lineSpacingExtra="0dp"
+                                    android:padding="@dimen/margin_5"
+                                    android:text="Relax with our\nSleep\nMusic collection"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/large_text" />
+
+                                <!-- android:background="@drawable/cornor_skiny"-->
+                                <TextView
+                                    android:id="@+id/browse_text"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginStart="@dimen/margin_5"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_regular"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:lineSpacingExtra="0dp"
+                                    android:padding="@dimen/margin_5"
+                                    android:text="Browse our\nLibrary\n of music &amp; chants"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/large_text" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/margin100"
+                        android:background="@drawable/curvy_header"
+                        android:gravity="center_horizontal">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/margin100"
+                            android:layout_height="@dimen/margin_30"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/margin_20"
+                            android:src="@drawable/logo_white" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/notification"
+                        android:layout_width="@dimen/dp25"
+                        android:layout_height="@dimen/dp25"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="@dimen/margin_15"
+                        android:layout_marginEnd="@dimen/margin_20"
+                        android:src="@drawable/notification" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_60"
+                        android:layout_marginEnd="@dimen/margin_50"
+                        android:background="@drawable/curvy_header_red"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_20">
+
+
+                        <TextView
+                            android:id="@+id/username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/margin_10"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Good Morning, Alisa"
+                            android:textColor="@color/app_textcolor"
+                            android:textSize="@dimen/margin_25" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/margin_10"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Soul will generate personalized\nmeditation fitting your mood"
+                            android:textColor="@color/app_textcolor"
+                            android:textSize="@dimen/normal_text" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/upgrade_premium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/frame_lay"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:background="@drawable/button_gradiant"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:padding="@dimen/margin_15"
+                    android:text="Upgrade to Premium"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/large_text" />
+
+
+                <TextView
+                    android:id="@+id/what_u_feel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/upgrade_premium"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:fontFamily="@font/poppins_regular"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:text="How do you want to feel today?"
+                    android:textColor="@color/app_textcolor"
+                    android:textSize="@dimen/margin_20" />
+
+                <LinearLayout
+                    android:id="@+id/smile_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/what_u_feel"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/margin100"
+                        android:layout_margin="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/smily_background"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/margin35"
+                            android:layout_height="@dimen/margin35"
+                            android:layout_gravity="center"
+                            android:src="@drawable/happy_new" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Happy"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/very_very_small_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/margin100"
+                        android:layout_margin="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/smily_background"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/margin35"
+                            android:layout_height="@dimen/margin35"
+                            android:layout_gravity="center"
+                            android:src="@drawable/motivated_new" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Motivated"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/very_very_small_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/margin100"
+                        android:layout_margin="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/smily_background"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/margin35"
+                            android:layout_height="@dimen/margin35"
+                            android:layout_gravity="center"
+                            android:src="@drawable/peaceful_new" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Peaceful"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/very_very_small_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/margin100"
+                        android:layout_margin="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/smily_background"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/margin35"
+                            android:layout_height="@dimen/margin35"
+                            android:layout_gravity="center"
+                            android:src="@drawable/confident_new" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Confident"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/very_very_small_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/margin100"
+                        android:layout_margin="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/smily_background"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/margin35"
+                            android:layout_height="@dimen/margin35"
+                            android:layout_gravity="center"
+                            android:src="@drawable/loving_new" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Loving"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/very_very_small_text" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/margin100"
+                        android:layout_margin="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/smily_background"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/margin_5">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/margin35"
+                            android:layout_height="@dimen/margin35"
+                            android:layout_gravity="center"
+                            android:src="@drawable/energized_new" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:fontFamily="@font/poppins_regular"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:text="Energized"
+                            android:textColor="@color/app_color"
+                            android:textSize="@dimen/very_very_small_text" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <org.angmarch.views.NiceSpinner
+                    android:id="@+id/nice_spinner"
+                    android:layout_below="@+id/smile_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray_light"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginEnd="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10"/>
+
+
+
+                <RelativeLayout
+                    android:id="@+id/popular_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/nice_spinner"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Most Popular"
+                        android:textColor="@color/app_textcolor"
+                        android:textSize="@dimen/large_text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/mostpopular_viewall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/margin_20"
+                        android:text="View All"
+                        android:textColor="@color/dark_gray"
+                        android:textSize="@dimen/normal_text" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/popular_lay"
+                    android:background="@drawable/recycler_bg_image">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/popular_recylerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_marginBottom="@dimen/margin_10" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/meditation_lay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relative_one"
+                    android:layout_marginStart="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_10">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="Meditations"
+
+                        android:textColor="@color/app_textcolor"
+                        android:textSize="@dimen/large_text"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/meditation_viewall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/margin_20"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="View All"
+
+                        android:textColor="@color/dark_gray"
+                        android:textSize="@dimen/normal_text" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/meditation_lay"
+                    android:background="@drawable/recycler_bg_image">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/meditation_recylerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_marginEnd="@dimen/margin_20"
+                        android:layout_marginBottom="@dimen/margin_10" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

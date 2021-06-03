@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <TextView
+        android:id="@+id/favourites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Favourites"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:id="@+id/downloads"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Downloads"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:id="@+id/change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Change Password"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Profile"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:id="@+id/manage_subscription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Manage Subscription"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:id="@+id/privacy_policy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Privacy Policy"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:id="@+id/contact_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Contact Us"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="0dp"
+        android:padding="@dimen/margin_10"
+        android:text="Logout"
+        android:textColor="@color/app_textcolor"
+        android:textSize="@dimen/extra_large" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin1"
+        android:background="@color/gray_light" />
+
+
+</LinearLayout>

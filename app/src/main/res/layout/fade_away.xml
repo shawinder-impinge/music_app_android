@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:circleview="http://schemas.android.com/apk/res-auto"
+    xmlns:timer="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
+        android:id="@+id/circular_progress"
+        android:layout_width="@dimen/margin_300"
+        android:layout_height="@dimen/margin_300"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        circleview:direction="clockwise"
+        circleview:progressColor="@color/app_color"
+        circleview:progressStrokeWidth="@dimen/margin_5" />
+
+
+    <com.bcgdv.asia.lib.ticktock.TickTockView
+        android:id="@+id/mCountUp"
+        android:layout_width="@dimen/margin250"
+        android:layout_height="@dimen/margin250"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        circleview:tickAutoFitText="true"
+        circleview:tickDotRadius="0dp"
+        circleview:tickEmptyRingColor="@android:color/darker_gray"
+        circleview:tickFillRingColor="@color/app_color"
+        circleview:tickMiddleColor="@color/white"
+        circleview:tickMoveCounterClockwise="true"
+        circleview:tickRingThickness="@dimen/margin_5"
+        circleview:tickText=""
+        circleview:tickTextColor="@color/app_color"
+        circleview:tickTextSize="@dimen/dp25" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/margin_10"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/pause"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="PAUSE"
+            android:textColor="@color/app_textcolor"
+            android:textSize="@dimen/margin_20" />
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="CANCEL"
+            android:textColor="@color/app_textcolor"
+            android:textSize="@dimen/margin_20" />
+
+    </LinearLayout>
+
+</RelativeLayout>

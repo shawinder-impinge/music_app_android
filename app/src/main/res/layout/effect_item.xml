@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_5">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="@dimen/margin120"
+            android:layout_height="@dimen/margin120"
+            app:cardCornerRadius="@dimen/margin_10">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/dummy" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/song_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_view"
+            android:gravity="center"
+            android:textSize="@dimen/large_text"
+            android:padding="@dimen/margin2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/margin3"
+            android:layout_marginBottom="@dimen/margin1"
+            android:fontFamily="@font/poppins_regular"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:text="Waves"
+            android:textColor="@color/black" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

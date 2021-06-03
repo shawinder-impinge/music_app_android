@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dp25"
+            android:layout_height="@dimen/dp25"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/margin_10"
+            android:src="@drawable/tick" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_10"
+
+            android:layout_toEndOf="@+id/check_icon"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:text="100+ guided meditation covering anxiety,focus,stress,gratitude and much more"
+            android:textColor="@color/app_textcolor"
+            android:textSize="@dimen/large_text" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

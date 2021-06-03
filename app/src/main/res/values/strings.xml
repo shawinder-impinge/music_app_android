@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">Soul</string>
+    <string name="skip"><u>Skip for now</u></string>
+    <string name="something_went_wrong"><u>Something went wrong</u></string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="some_text_message">Some Text Message</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="you_want_logout">Do you want to logout?</string>
+    <string name="check_network_connection">Please check your network connection</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="profile">profile</string>
+    <string name="about">About</string>
+    <string name="edit">Edit</string>
+    <string name="how_to_meditate">How to Meditate</string>
+    <string name="Gallary">Gallary</string>
+    <string name="play">Play</string>
+    <string name="simple_program_text">A simple 30-day program for everyone</string>
+    <string name="big_idea">The Big Idea</string>
+    <string name="min_10">10 Min</string>
+    <string name="jelf">Jelfwaren</string>
+    <string name="meditate_teacher">Meditate Teacher dn Author</string>
+    <string name="better_sleep">Better Sleep</string>
+    <string name="reduce_anxiety">Reduce Anxiety</string>
+    <string name="develop_gratitude">Develop Gratitude</string>
+    <string name="increase_happiness">Increase Happiness</string>
+    <string name="reduce_stress">Reduce Stress</string>
+    <string name="improve_performance">Improve Performance</string>
+    <string name="build_self_esteem">Build Self Esteem</string>
+    <string name="subconsious_programming">Subconscious Programming</string>
+    <string name="no_fav_here">No Favourite Here</string>
+    <string name="tap_here_fav_icon">Tap on hte heart icon on track player screen and they will show here</string>
+    <string name="favourites">Favourites</string>
+    <string name="never_ask_again">You have set permission popup to never ask again, Kindly allow permission from device application settings</string>
+    <string name="download_inProgress">Download is in progress</string>
+    <string name="play_song">Play Song</string>
+    <string name="nothing_here">NOTHING HERE</string>
+
+    <string name="save">Save</string>
+
+
+    <string name="please_select_subscription_option">Please select subscription option</string>
+
+
+    <string name="facebook_app_id">762709784679402</string>
+    <string name="fb_login_protocol_scheme">fb762709784679402</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="no_result_found">No result found</string>
+    <string name="time_just_now">Just now</string>
+    <string name="time_minute_ago">a minute ago</string>
+    <string name="time_min_ago">Minutes ago</string>
+    <string name="time_an_hr_ago">An hour ago</string>
+    <string name="time_hr_ago">Hours ago</string>
+    <string name="time_yesterday">Yesterday</string>
+    <string name="time_day_ago">Days ago</string>
+    <string name="time_today">Today</string>
+</resources>

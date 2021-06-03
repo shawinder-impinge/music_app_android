@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/nice_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/smile_lay"
+                android:layout_margin="@dimen/margin_20"
+                android:background="#F2F2F7"
+                android:paddingStart="@dimen/margin_5"
+                app:smsp_hint="Select Category"
+                app:smsp_itemColor="@color/app_textcolor"
+                app:smsp_selectedItemListColor="#FF5252"
+                app:smsp_underlineColor="#F2F2F7" />
+
+
+            <LinearLayout
+                android:id="@+id/linear_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nice_spinner"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <TextView
+                    android:layout_width="@dimen/margin0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.1"
+                    android:gravity="end"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Hours" />
+
+                <TextView
+                    android:layout_width="@dimen/margin0"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:text="Minutes" />
+
+                <TextView
+                    android:layout_width="@dimen/margin0"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.1"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="start"
+                    android:text="Seconds" />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/relative_one"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_lay"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="@dimen/margin_10">
+
+
+                <com.ikovac.timepickerwithseconds.TimePicker
+                    android:id="@+id/time_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_onee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/nice_spinner"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:padding="@dimen/margin_10"
+
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/set_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_vertical"
+                    android:text="00:00"
+                    android:textSize="@dimen/large_text" />
+
+                <TextView
+                    android:id="@+id/select_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_toEndOf="@+id/set_time"
+                    android:background="@drawable/cornor_bg2"
+                    android:fontFamily="@font/poppins_regular"
+                    android:padding="@dimen/margin_10"
+                    android:text="Select Start Date"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/normal_text" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/set"
+                android:layout_width="@dimen/margin80"
+                android:layout_height="@dimen/margin80"
+                android:layout_below="@+id/relative_one"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_20"
+                android:background="@drawable/ring_drawable"
+                android:gravity="center"
+                android:text="Set"
+                android:textColor="@color/white" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/set"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Fade Away"
+                    android:textColor="@color/app_textcolor" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Alarm Sound"
+                    android:textColor="@color/app_textcolor" />
+            </RadioGroup>
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

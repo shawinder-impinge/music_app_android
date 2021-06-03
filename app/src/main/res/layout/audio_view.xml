@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/audioplayer_toolbar" />
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/player_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp200"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent"
+        app:auto_show="true"
+        app:controller_layout_id="@layout/activity_audio_player_view"
+        app:fastforward_increment="15000"
+        app:hide_on_touch="false"
+        app:resize_mode="fit"
+        app:rewind_increment="15000"
+        app:show_timeout="0"
+        app:surface_type="none"
+        app:use_controller="true" />
+
+    <RelativeLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/player_view"
+
+        android:background="@color/black">
+
+        <ImageView
+            android:id="@+id/drop_down"
+            android:layout_width="@dimen/dp25"
+            android:layout_height="@dimen/dp25"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_20"
+            android:src="@drawable/drop_down" />
+
+        <TextView
+            android:id="@+id/album_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_10"
+            android:text="How to Meditate"
+            android:textColor="@color/white"
+            android:textSize="@dimen/margin_20" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/song_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/how_meditate"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_20"
+                android:gravity="center"
+                android:text="MEDITATE TEACHER AND AUTHOR"
+                android:textColor="@color/white"
+                android:textSize="@dimen/extra_large" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/subscription_lay_bg"
+                android:orientation="horizontal"
+
+                android:padding="@dimen/margin_5">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/author_image"
+                    android:layout_width="@dimen/margin_30"
+                    android:layout_height="@dimen/margin_30"
+                    android:layout_centerVertical="true"
+
+                    android:src="@drawable/check" />
+
+                <TextView
+                    android:id="@+id/author_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_10"
+                    android:layout_marginEnd="@dimen/margin_10"
+                    android:layout_toEndOf="@+id/check"
+                    android:layout_toRightOf="@+id/author_image"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:text="Jeff Warren"
+                    android:textColor="@color/app_color" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/feature_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginEnd="@dimen/margin_20"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:gravity="center"
+
+            android:orientation="horizontal">
+
+
+            <!--android:onClick="onClick" -->
+            <ImageView
+                android:id="@+id/song_like"
+                android:layout_width="@dimen/margin_50"
+                android:layout_height="@dimen/margin_50"
+                android:background="@drawable/transparent_round_bg"
+                />
+
+
+            <ImageView
+                android:id="@+id/share"
+                android:layout_width="@dimen/margin_50"
+                android:layout_height="@dimen/margin_50"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_10"
+                android:background="@drawable/transparent_round_bg"
+
+                android:src="@drawable/share" />
+
+
+            <ImageView
+                android:id="@+id/download"
+                android:layout_width="@dimen/margin_50"
+                android:layout_height="@dimen/margin_50"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/margin_10"
+                android:background="@drawable/transparent_round_bg"
+
+                android:src="@drawable/download" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</RelativeLayout>

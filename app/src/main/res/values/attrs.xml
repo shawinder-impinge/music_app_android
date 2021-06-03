@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Arclayout">
+        <attr name="arc_height" format="dimension" />
+        <attr name="arc_position">
+            <enum name="bottom" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="left" value="2"/>
+            <enum name="right" value="3"/>
+        </attr>
+        <attr name="arc_cropDirection" format="enum">
+            <enum name="cropInside" value="0" />
+            <enum name="cropOutside" value="1"/>
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="ProgressWheel">
+        <attr name="matProg_progressIndeterminate" format="boolean" />
+        <attr name="matProg_barColor" format="color" />
+        <attr name="matProg_rimColor" format="color" />
+        <attr name="matProg_rimWidth" format="dimension" />
+        <attr name="matProg_spinSpeed" format="float" />
+        <attr name="matProg_barSpinCycleTime" format="integer" />
+        <attr name="matProg_circleRadius" format="dimension" />
+        <attr name="matProg_fillRadius" format="boolean" />
+        <attr name="matProg_barWidth" format="dimension" />
+        <attr name="matProg_linearProgress" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="Rotate3dAnimation">
+        <attr name="rollType" format="enum">
+            <enum name="x" value="0"/>
+            <enum name="y" value="1"/>
+            <enum name="z" value="2"/>
+        </attr>
+        <attr name="fromDeg" format="float" />
+        <attr name="toDeg" format="float" />
+        <attr name="pivotX" format="fraction"/>
+        <attr name="pivotY" format="fraction" />
+    </declare-styleable>
+
+    <!--RangeSeekBar-->
+    <declare-styleable name="RangeSeekBar">
+        <attr name="absoluteMinValue" format="integer|float"/>
+        <attr name="absoluteMaxValue" format="integer|float"/>
+        <attr name="singleThumb" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="CropIwaView">
+
+        <attr name="ci_scale_enabled" format="boolean" />
+        <attr name="ci_translation_enabled" format="boolean" />
+        <attr name="ci_max_scale" format="float" />
+        <attr name="ci_crop_scale" format="float" />
+        <attr name="ci_initial_position" format="enum">
+            <enum name="centerInside" value="0" />
+            <enum name="centerCrop" value="1" />
+        </attr>
+
+        <attr name="ci_border_color" format="color" />
+        <attr name="ci_border_width" format="dimension" />
+
+        <attr name="ci_corner_color" format="color" />
+        <attr name="ci_corner_width" format="dimension" />
+
+        <attr name="ci_grid_width" format="dimension" />
+        <attr name="ci_grid_color" format="color" />
+        <attr name="ci_draw_grid" format="boolean" />
+
+        <attr name="ci_min_crop_width" format="dimension" />
+        <attr name="ci_min_crop_height" format="dimension" />
+
+        <attr name="ci_overlay_color" format="color" />
+
+        <attr name="ci_dynamic_aspect_ratio" format="boolean" />
+        <attr name="ci_aspect_ratio_w" format="integer" />
+        <attr name="ci_aspect_ratio_h" format="integer" />
+
+        <attr name="ci_crop_shape" format="enum">
+            <enum name="rectangle" value="0" />
+            <enum name="oval" value="1" />
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="TintableImageView">
+            <attr name="tintColorStateList" format="reference|color" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomViewPager" >
+        <attr name="swipe_orientation" format="enum" >
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+
+</resources>
