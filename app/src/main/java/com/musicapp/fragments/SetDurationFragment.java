@@ -31,11 +31,18 @@ import com.musicapp.models.User;
 import com.musicapp.retrofit.APIClient;
 import com.musicapp.retrofit.APIInterface;
 import com.musicapp.retrofit.response.RestResponse;
+import com.musicapp.util.PreferenceData;
+import com.musicapp.util.SharedPreference;
 import com.musicapp.util.Utility;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import io.github.deweyreed.scrollhmspicker.ScrollHmsPicker;
 import retrofit2.Call;
@@ -50,9 +57,9 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
     int Selected_id;
     TextView select_time, set_time, set;
     private Calendar calendar;
-    private int mYear, mMonth, mDay, mHour, mMinute;
+    private int mYear, mMonth, mDay, mHour, mMinute, hours, minutes, seconds;
     DatePickerDialog datePickerDialog;
-    String selected_date;
+    String selected_date, utcTime, final_time;
     TimePicker time_picker;
 
 
@@ -62,12 +69,39 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.set_duration, container, false);
         context = container.getContext();
         findId(view);
+        getUtc(view);
         getAllCategories(view);
         calendar = Calendar.getInstance();
         mDay = calendar.get(Calendar.DAY_OF_MONTH);
         mYear = calendar.get(Calendar.YEAR);
         mMonth = calendar.get(Calendar.MONTH);
         return view;
+    }
+
+    private void getUtc(View view) {
+/*
+
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss");
+        f.setTimeZone(TimeZone.getTimeZone("UTC"));
+        utcTime = f.format(new Date());
+*/
+
+
+        DateFormat df = DateFormat.getTimeInstance();
+        df.setTimeZone(TimeZone.getTimeZone("gmt"));
+        utcTime = df.format(new Date());
+
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        final_time = currentDate + " " + currentTime + " " + utcTime;
+
+        Log.e("logcat_utc", utcTime);
+        Log.e("logcat_current_time", currentTime);
+        Log.e("logcat_current_date", currentDate);
+        Log.e("logcat_final_time", final_time);
+
+
     }
 
     private void findId(View view) {
@@ -157,14 +191,13 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
 
             case R.id.set:
 
-                //callsetDurationApi();
 
-                int hours = time_picker.getCurrentHour();
-                int minutes = time_picker.getCurrentMinute();
-                int seconds = time_picker.getCurrentSeconds();
+                hours = time_picker.getCurrentHour();
+                minutes = time_picker.getCurrentMinute();
+                seconds = time_picker.getCurrentSeconds();
+                callsetDurationApi();
 
-                Log.e("TIMEEEEE", "---" + hours + "---" + minutes + "---" + seconds);
-                getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
+                // getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
 
                 break;
         }
@@ -208,10 +241,10 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
     private void callsetDurationApi() {
         Utility utility = Utility.getInstance(getActivity());
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("user", "");
-        hashMap.put("category_id", "");
-        hashMap.put("current_time", "");
-        hashMap.put("duration_in_min", "");
+        hashMap.put("user", SharedPreference.fetchPrefenceData(context, PreferenceData.USER_ID));
+        hashMap.put("category_id", Selected_id);
+        hashMap.put("current_time", final_time);
+        hashMap.put("duration_in_min", "10");
 
         Log.e("setDurationData", String.valueOf(hashMap));
 

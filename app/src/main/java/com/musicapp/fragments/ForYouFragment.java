@@ -384,7 +384,7 @@ public class ForYouFragment extends Fragment implements View.OnClickListener {
                         Log.e("RESPONSE_MESSAGE", String.valueOf(response.body().msg()));
                         DataPojo dataPojo = response.body().data();
 
-                        meditationPojoArrayList.addAll(dataPojo.getMeditation().getSongs());
+                      //  meditationPojoArrayList.addAll(dataPojo.getMeditation().getSongs());
                         // mostPopularPojoArrayList.addAll(dataPojo.getMost_popular_songs());
 
                         meditation_id = dataPojo.getMeditation().getId();

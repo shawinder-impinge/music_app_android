@@ -81,7 +81,7 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
     private Calendar calendar;
     private int mYear, mMonth, mDay, mHour, mMinute;
     DatePickerDialog datePickerDialog;
-    String selected_date, selected_date2;
+    String selected_date, selected_date2,setTime,endTime,utcTime;
     String current_date = "";
 
     @Nullable
@@ -97,6 +97,11 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
         mMonth = calendar.get(Calendar.MONTH);
 
 
+        DateFormat df = DateFormat.getTimeInstance();
+        df.setTimeZone(TimeZone.getTimeZone("gmt"));
+        utcTime = df.format(new Date());
+
+
         Calendar c = Calendar.getInstance();
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
@@ -107,7 +112,8 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
 
     private void getUtc() {
         DateFormat df = DateFormat.getTimeInstance();
-        df.setTimeZone(TimeZone.getTimeZone("gmt"));
+        //df.setTimeZone(TimeZone.getTimeZone("gmt"));
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
         String gmtTime = df.format(new Date());
         Log.e("timezone_utc", gmtTime);
     }
@@ -180,10 +186,10 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
     private void callAddAlarmApi() {
         Utility utility = Utility.getInstance(getActivity());
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("user", "");
-        hashMap.put("category_id", "");
-        hashMap.put("set_time", "");
-        hashMap.put("end_time", "");
+        hashMap.put("user", SharedPreference.fetchPrefenceData(context, PreferenceData.USER_ID));
+        hashMap.put("category_id", Selected_id);
+        hashMap.put("set_time", selected_date);
+        hashMap.put("end_time", selected_date2);
 
         Log.e("addAlarmData", String.valueOf(hashMap));
 
@@ -241,10 +247,10 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.set:
 
-                getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
+               // getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
 
 
-                // callAddAlarmApi();
+                callAddAlarmApi();
 //                Calendar now = Calendar.getInstance();
 //                String start_hours = String.valueOf(timePicker.getCurrentHour());
 //                String start_minutes = String.valueOf(timePicker.getCurrentMinute());
@@ -351,6 +357,10 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
                             int hour = hourOfDay % 12;
                             date_1.setText(selected_date + " " + String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
                                     minute, hourOfDay < 12 ? "am" : "pm"));
+                             setTime=date_1.getText().toString()+" "+utcTime;
+                            Log.e("setTime",setTime);
+
+
                         } else {
                             Toast.makeText(getActivity(), "Please select valid Time", Toast.LENGTH_LONG).show();
                             date_1.setVisibility(View.INVISIBLE);
@@ -385,6 +395,9 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
                             int hour = hourOfDay % 12;
                             date_2.setText(selected_date2 + " " + String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
                                     minute, hourOfDay < 12 ? "am" : "pm"));
+
+                            String endTime=date_2.getText().toString()+" "+utcTime;
+                            Log.e("endTime",endTime);
                         } else {
                             //it's before current'
                             Toast.makeText(getActivity(), "Please select Invalid Time", Toast.LENGTH_LONG).show();

@@ -120,15 +120,15 @@
                                 <!-- android:background="@drawable/cornor_skiny"-->
                                 <TextView
                                     android:id="@+id/relax_text"
-                                    android:layout_width="0dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginEnd="@dimen/margin_5"
-                                    android:layout_weight="1"
                                     android:fontFamily="@font/poppins_regular"
                                     android:gravity="center"
                                     android:includeFontPadding="false"
                                     android:lineSpacingExtra="0dp"
                                     android:padding="@dimen/margin_5"
+                                    android:visibility="gone"
                                     android:text="Relax with our\nSleep\nMusic collection"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/large_text" />
@@ -136,16 +136,16 @@
                                 <!-- android:background="@drawable/cornor_skiny"-->
                                 <TextView
                                     android:id="@+id/browse_text"
-                                    android:layout_width="0dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:layout_marginStart="@dimen/margin_5"
-                                    android:layout_weight="1"
                                     android:fontFamily="@font/poppins_regular"
                                     android:gravity="center"
                                     android:includeFontPadding="false"
                                     android:lineSpacingExtra="0dp"
                                     android:padding="@dimen/margin_5"
-                                    android:text="Browse our\nLibrary\n of music &amp; chants"
+                                    android:visibility="gone"
+                                    android:text="Browse our Library of music"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/large_text" />
 
@@ -263,6 +263,7 @@
                     android:layout_marginTop="@dimen/margin_20"
                     android:layout_marginEnd="@dimen/margin_10"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="6">
 
                     <LinearLayout
@@ -454,9 +455,10 @@
                         android:id="@+id/nice_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/smile_lay"
+                        android:layout_below="@+id/what_u_feel"
                         app:smsp_underlineColor="#F2F2F7"
                         android:paddingStart="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_10"
                         android:background="#F2F2F7"
                         app:smsp_itemColor="@color/app_textcolor"
                         app:smsp_selectedItemListColor="#FF5252"
