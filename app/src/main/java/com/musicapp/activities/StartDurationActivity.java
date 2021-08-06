@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcgdv.asia.lib.ticktock.TickTockView;
@@ -21,6 +22,7 @@ public class StartDurationActivity extends AppCompatActivity implements View.OnC
     TextView title;
     TickTockView mCountUp;
     private TextView pause, cancel;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +46,13 @@ public class StartDurationActivity extends AppCompatActivity implements View.OnC
     private void findId() {
         mCountUp = (TickTockView) findViewById(R.id.mCountUp);
         title = findViewById(R.id.title);
+        back = findViewById(R.id.back);
         title.setText("Alarm");
         pause = findViewById(R.id.pause);
         cancel = findViewById(R.id.cancel);
         pause.setOnClickListener(this);
         cancel.setOnClickListener(this);
+        back.setOnClickListener(this);
     }
 
     @Override
@@ -89,6 +93,11 @@ public class StartDurationActivity extends AppCompatActivity implements View.OnC
                // loadFragment(new EndTimeFragment());
                 finish();
                 break;
+            case R.id.back:
+                finish();
+                break;
+
+
         }
     }
     public boolean loadFragment(Fragment fragment) {

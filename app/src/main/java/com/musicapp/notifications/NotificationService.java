@@ -92,6 +92,15 @@ public class NotificationService extends FirebaseMessagingService {
                 intent.putExtra("title", title);
                 intent.putExtra("body", messageBody);
                 pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            }else if (type.equalsIgnoreCase("music_alarm_notification")) {
+
+                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("pushnotification", "message");
+                intent.putExtra("title", title);
+                intent.putExtra("body", "Soul");
+                pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
             }
 
 

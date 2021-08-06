@@ -72,6 +72,8 @@ dependencies {
     implementation 'com.github.florent37:singledateandtimepicker:2.2.7'
     implementation 'com.github.tylersuehr7:googlish-datetime-picker:1.1'
 
+    implementation 'com.github.jarklee:materialdatetimepicker:2.5.3'
+
 
 
 

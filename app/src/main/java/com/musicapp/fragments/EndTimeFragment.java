@@ -3,6 +3,7 @@ package com.musicapp.fragments;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -34,6 +35,7 @@ import com.github.florent37.singledateandtimepicker.dialog.DoubleDateAndTimePick
 import com.github.florent37.singledateandtimepicker.dialog.SingleDateAndTimePickerDialog;
 import com.ikovac.timepickerwithseconds.MyTimePickerDialog;
 import com.ikovac.timepickerwithseconds.TimePicker;
+import com.jarklee.materialdatetimepicker.time.RadialPickerLayout;
 import com.musicapp.R;
 import com.musicapp.activities.AlarmActivity;
 import com.musicapp.activities.FavouriteListActivity;
@@ -49,6 +51,7 @@ import com.musicapp.retrofit.response.RestResponse;
 import com.musicapp.util.PreferenceData;
 import com.musicapp.util.SharedPreference;
 import com.musicapp.util.Utility;
+import com.musicapp.util.sweetdialog.Alert;
 
 import java.sql.Time;
 import java.text.DateFormat;
@@ -59,6 +62,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import io.github.deweyreed.scrollhmspicker.ScrollHmsPicker;
@@ -67,7 +71,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class EndTimeFragment extends Fragment implements View.OnClickListener {
+public class EndTimeFragment extends Fragment implements View.OnClickListener, com.jarklee.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener, com.jarklee.materialdatetimepicker.time.TimePickerDialog.OnTimeSetListener {
 
     Context context;
     TimePicker timePicker;
@@ -81,8 +85,10 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
     private Calendar calendar;
     private int mYear, mMonth, mDay, mHour, mMinute;
     DatePickerDialog datePickerDialog;
-    String selected_date, selected_date2,setTime,endTime,utcTime;
+    String selected_date, selected_date2, setTime, endTime, utcTime;
     String current_date = "";
+    String date_one, time_one, date_two, time_two, final_start_time, final_end_time;
+    boolean isFirstDate = false, isSecondDate = false;
 
     @Nullable
     @Override
@@ -118,6 +124,11 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
         Log.e("timezone_utc", gmtTime);
     }
 
+    @Override
+    public void onAttach(@NonNull Context act) {
+        super.onAttach(context);
+        this.context = act;
+    }
 
     private void getAllCategories(View view) {
         try {
@@ -186,10 +197,13 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
     private void callAddAlarmApi() {
         Utility utility = Utility.getInstance(getActivity());
         HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("user", SharedPreference.fetchPrefenceData(context, PreferenceData.USER_ID));
-        hashMap.put("category_id", Selected_id);
-        hashMap.put("set_time", selected_date);
-        hashMap.put("end_time", selected_date2);
+        hashMap.put("user", SharedPreference.fetchPrefenceData(getActivity(), PreferenceData.USER_ID));
+        hashMap.put("category_id", String.valueOf(Selected_id));
+//        hashMap.put("set_time", selected_date);
+//        hashMap.put("end_time", selected_date2);
+        hashMap.put("set_time", final_start_time);
+        hashMap.put("end_time", final_end_time);
+        hashMap.put("timezone", "UTC");
 
         Log.e("addAlarmData", String.valueOf(hashMap));
 
@@ -247,10 +261,23 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.set:
 
-               // getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
+                // getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
+
+                if (Selected_id!=0){
+                    callAddAlarmApi();
+                }else {
+                    Alert.showWarningAlert(context,"please select category");
+                }
 
 
-                callAddAlarmApi();
+
+
+//                Log.e("User_id_",SharedPreference.fetchPrefenceData(getActivity(), PreferenceData.USER_ID));
+//                Log.e("User_selected_id", String.valueOf(Selected_id));
+//                Log.e("User_selected_date",selected_date);
+//                Log.e("User_selected_date2",selected_date2);
+
+
 //                Calendar now = Calendar.getInstance();
 //                String start_hours = String.valueOf(timePicker.getCurrentHour());
 //                String start_minutes = String.valueOf(timePicker.getCurrentMinute());
@@ -265,16 +292,18 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.time1:
+                isFirstDate = true;
 
                 datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        date_1.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
+                        //  date_1.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
                         selected_date = date_1.getText().toString();
+                        date_one = year + "-" + (month + 1) + "-" + dayOfMonth;
 
                         Log.e("sellllllll", selected_date);
-                        Log.e("currrrrrrr", selected_date);
+                        Log.e("currrrrrrr", date_one);
 
 
                         try {
@@ -294,43 +323,54 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
                         }
 
 
-                        openTimePicker();
+                        //openTimePicker();
 
+                        openNewTimePicker();
 
                     }
                 }, mYear, mMonth, mDay);
-
-                // set maximum date to be selected as today
                 datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
-
-                // show the dialog
                 datePickerDialog.show();
+
+                //openNewDatePicker();
 
                 break;
             case R.id.time2:
-
+                isSecondDate = true;
                 datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
                         // adding the selected date in the edittext
-                        date_2.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
-                        selected_date2 = date_2.getText().toString();
+                        //  date_2.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
 
-                        openTimePicker2();
+                        selected_date2 = date_2.getText().toString();
+                        date_two = year + "-" + (month + 1) + "-" + dayOfMonth;
+
+                        //openTimePicker2();
+                        openNewTimePicker();
 
 
                     }
                 }, mYear, mMonth, mDay);
-
-                // set maximum date to be selected as today
                 datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
-
-                // show the dialog
                 datePickerDialog.show();
 
                 break;
         }
     }
+
+    private void openNewDatePicker() {
+        Calendar now = Calendar.getInstance();
+        com.jarklee.materialdatetimepicker.date.DatePickerDialog dpd = com.jarklee.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                EndTimeFragment.this,
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH));
+
+        dpd.show(getFragmentManager(), "Datepickerdialog");
+
+    }
+
 
     private void openTimePicker() {
 
@@ -357,8 +397,8 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
                             int hour = hourOfDay % 12;
                             date_1.setText(selected_date + " " + String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
                                     minute, hourOfDay < 12 ? "am" : "pm"));
-                             setTime=date_1.getText().toString()+" "+utcTime;
-                            Log.e("setTime",setTime);
+                            setTime = date_1.getText().toString() + " " + utcTime;
+                            Log.e("setTime", setTime);
 
 
                         } else {
@@ -370,7 +410,6 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
                 }, mHour, mMinute, false);
         timePickerDialog.show();
     }
-
 
     private void openTimePicker2() {
 
@@ -396,8 +435,8 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
                             date_2.setText(selected_date2 + " " + String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
                                     minute, hourOfDay < 12 ? "am" : "pm"));
 
-                            String endTime=date_2.getText().toString()+" "+utcTime;
-                            Log.e("endTime",endTime);
+                            String endTime = date_2.getText().toString() + " " + utcTime;
+                            Log.e("endTime", endTime);
                         } else {
                             //it's before current'
                             Toast.makeText(getActivity(), "Please select Invalid Time", Toast.LENGTH_LONG).show();
@@ -408,5 +447,117 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener {
                 }, mHour, mMinute, false);
         timePickerDialog.show();
     }
+
+    @Override
+    public void onDateSet(com.jarklee.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = year + "/" + (++monthOfYear) + "/" + dayOfMonth;
+        Log.e("selected_date", date);
+        openNewTimePicker();
+    }
+
+    private void openNewTimePicker() {
+        Calendar now = Calendar.getInstance();
+        com.jarklee.materialdatetimepicker.time.TimePickerDialog tpd = com.jarklee.materialdatetimepicker.time.TimePickerDialog.newInstance(
+                EndTimeFragment.this,
+                now.get(Calendar.HOUR_OF_DAY),
+                now.get(Calendar.MINUTE),
+                false);
+
+        tpd.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                Log.d("TimePicker", "Dialog was cancelled");
+            }
+        });
+        tpd.show(getFragmentManager(), "Timepickerdialog");
+    }
+
+
+    @Override
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String hourString = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
+        String minuteString = minute < 10 ? "0" + minute : "" + minute;
+        String secondString = second < 10 ? "0" + second : "" + second;
+
+
+        if (isFirstDate == true) {
+            time_one = hourString + ":" + minuteString + ":" + secondString;
+            date_1.setText(date_one + " " + time_one);
+
+            if (date_one != null && time_one != null) {
+                //final_start_time = getDate(date_one + " " + time_one);
+                Log.e("time_simple",date_one + " " + time_one);
+
+                final_start_time = localToUTC("yyyy-MM-dd HH:mm:ss",date_one + " " + time_one);
+
+                Log.e("time_converted",final_start_time);
+            } else {
+                Toast.makeText(context, "please select valid date & time", Toast.LENGTH_SHORT).show();
+            }
+            isFirstDate = false;
+        } else if (isSecondDate == true) {
+            time_two = hourString + ":" + minuteString + ":" + secondString;
+            date_2.setText(date_two + " " + time_two);
+
+            if (date_two != null && time_two != null) {
+
+
+               // final_end_time = getDate(date_two + " " + time_two);
+                final_end_time = localToUTC("yyyy-MM-dd HH:mm:ss",date_two + " " + time_two);
+
+                Log.e("selected_date_end", final_end_time);
+            } else {
+                Toast.makeText(context, "please select valid date & time", Toast.LENGTH_SHORT).show();
+            }
+            isSecondDate = false;
+        }
+
+
+    }
+
+
+    private String getDate(String ourDate) {
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+            Date value = formatter.parse(ourDate);
+
+            // SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yyyy HH:mm"); //this format changeable
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //this format changeable
+            dateFormatter.setTimeZone(TimeZone.getDefault());
+            ourDate = dateFormatter.format(value);
+
+            //Log.d("ourDate", ourDate);
+        } catch (Exception e) {
+            ourDate = "00-00-0000 00:00";
+        }
+        return ourDate;
+    }
+
+
+    public static String localToUTC(String dateFormat, String datesToConvert) {
+
+
+        String dateToReturn = datesToConvert;
+
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        sdf.setTimeZone(TimeZone.getDefault());
+        Date gmt = null;
+
+        SimpleDateFormat sdfOutPutToSend = new SimpleDateFormat(dateFormat);
+        sdfOutPutToSend.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        try {
+
+            gmt = sdf.parse(datesToConvert);
+            dateToReturn = sdfOutPutToSend.format(gmt);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateToReturn;
+    }
+
+
 
 }
