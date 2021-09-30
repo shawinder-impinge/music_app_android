@@ -37,6 +37,7 @@
         circleview:tickTextSize="@dimen/dp25" />
 
     <LinearLayout
+        android:id="@+id/bottom_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -64,5 +65,19 @@
             android:textSize="@dimen/margin_20" />
 
     </LinearLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_above="@+id/bottom_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_lay">
+
+        <include
+            layout="@layout/bottom_song_layout"
+            android:visibility="gone"/>
+    </FrameLayout>
+
 
 </RelativeLayout>

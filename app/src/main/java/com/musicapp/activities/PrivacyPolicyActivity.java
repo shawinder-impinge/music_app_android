@@ -60,7 +60,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
 
                         privacy_policy.setText(Html.fromHtml(privacy_text));
 
-                        Toast.makeText(PrivacyPolicyActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(PrivacyPolicyActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(PrivacyPolicyActivity.this, response.message(), Toast.LENGTH_SHORT).show();
 

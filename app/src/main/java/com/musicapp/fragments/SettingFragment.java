@@ -195,6 +195,7 @@ public class SettingFragment extends Fragment implements View.OnClickListener {
                     if (response.code() == 200) {
                         utility.hideLoading();
                         SharedPreference.savePreferenceData(context, PreferenceData.TOKEN, "");
+                        Toast.makeText(context, "Logout successfully", Toast.LENGTH_SHORT).show();
                         backToLogin();
 
                     } else {

@@ -129,13 +129,14 @@ public class WelcomeScreen extends BaseActivity implements View.OnClickListener 
         lets_start = findViewById(R.id.lets_start);
         skip.setOnClickListener(this);
         lets_start.setOnClickListener(this);
+        skip.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.skip:
-
+                redirectSignUp();
                 break;
 
             case R.id.lets_start:
@@ -153,7 +154,7 @@ public class WelcomeScreen extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onResume() {
         super.onResume();
-        getLoginVideo();
+       // getLoginVideo();
     }
 
 }

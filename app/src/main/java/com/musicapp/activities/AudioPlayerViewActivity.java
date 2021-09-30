@@ -1,6 +1,7 @@
 package com.musicapp.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -10,10 +11,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
@@ -40,18 +43,21 @@ import com.google.android.material.snackbar.Snackbar;
 import com.musicapp.R;
 import com.musicapp.localdatabase.DatabaseClient;
 import com.musicapp.localdatabase.DownloadedSongsModel;
+import com.musicapp.models.DataPojo;
 import com.musicapp.models.User;
 import com.musicapp.models.songsPojo;
 import com.musicapp.retrofit.APIClient;
 import com.musicapp.retrofit.APIInterface;
 import com.musicapp.retrofit.response.RestResponse;
 import com.musicapp.service.SoundService;
+import com.musicapp.util.Constants;
 import com.musicapp.util.MusicConstants;
 import com.musicapp.util.PlayerUtil;
 import com.musicapp.util.PreferenceData;
 import com.musicapp.util.SharedPreference;
 import com.musicapp.util.Utility;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -88,13 +94,21 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
     private ImageView mIvShare, song_like;
     boolean isUserFav;
     private songsPojo songsPojoObject;
+    ArrayList<songsPojo> list = new ArrayList<>();
+    public int selected_index = 1;
+    public static CountDownTimer countDownTimer;
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
+        Log.e("getAction", "intentttttt" + intent.getAction());
+
         switch (intent.getAction()) {
+
             case MusicConstants.ACTION.PAUSE_ACTION:
+
+                Log.e("getAction", "PAUSE");
                 simpleExoPlayer.setPlayWhenReady(false);
                 simpleExoPlayer.getPlaybackState();
                 Intent intent1 = new Intent(AudioPlayerViewActivity.this, SoundService.class);
@@ -103,7 +117,7 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
                 break;
 
             case MusicConstants.ACTION.PLAY_ACTION:
-
+                Log.e("getAction", "PLAY");
                 simpleExoPlayer.setPlayWhenReady(true);
                 simpleExoPlayer.getPlaybackState();
                 Intent intent2 = new Intent(AudioPlayerViewActivity.this, SoundService.class);
@@ -112,11 +126,20 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
                 break;
 
             case MusicConstants.ACTION.STOP_ACTION:
+
+                Log.e("getAction", "STOP");
                 simpleExoPlayer.setPlayWhenReady(false);
                 simpleExoPlayer.getPlaybackState();
                 Intent intent3 = new Intent(AudioPlayerViewActivity.this, SoundService.class);
                 intent3.setAction(MusicConstants.ACTION.STOP_ACTION);
                 startService(intent3);
+                break;
+            case "stop":
+
+                //fadeSong();
+                PlayerUtil playerUtil = PlayerUtil.getInstance(this, "");
+                playerUtil.fadeSong();
+
                 break;
         }
     }
@@ -165,13 +188,152 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.audio_view);
 
+        Log.e("check_intent", "onCreate");
 
+        if (getIntent().hasExtra("music_alarm_notification")) {
+            String title = getIntent().getStringExtra("title");
+            String album_id = getIntent().getStringExtra("album_id");
+            String subtype = getIntent().getStringExtra("subtype");
+
+            if (subtype.equalsIgnoreCase("music_alarm_notification_start")) {
+                getAllSongs(album_id);
+                Log.e("STATUS_TYPE", "START");
+            } else if (subtype.equalsIgnoreCase("music_alarm_notification_end")) {
+                Log.e("STATUS_TYPE", "STOP");
+
+                //fadeSong();
+
+                PlayerUtil playerUtil = PlayerUtil.getInstance(this, "");
+                playerUtil.fadeSong();
+
+
+            }
+
+
+        } else if (getIntent().hasExtra("music_duration_notification")) {
+
+            String album_id = getIntent().getStringExtra("album_id");
+            String title = getIntent().getStringExtra("title");
+
+            if (title.equalsIgnoreCase("Alarm Duration Notification")) {
+
+
+                PlayerUtil playerUtil = PlayerUtil.getInstance(this, null);
+                songsPojoObject = playerUtil.getSongsPojo();
+                songId = songsPojoObject.getId();
+                songTitle = songsPojoObject.getTitle();
+                // albumTitle = getIntent().getStringExtra(Constants.ALBUM_TITILE);
+                songDescription = songsPojoObject.getDescription();
+                song_coverImage = songsPojoObject.getCover_images();
+                song_duration = songsPojoObject.getSongs_length();
+                song_audio_url = songsPojoObject.getAudios();
+                song_author_name = songsPojoObject.getAuthor_name();
+                song_author_image = songsPojoObject.getAuthor_image();
+
+                playerView = findViewById(R.id.player_view);
+                progressBar = findViewById(R.id.progress_bar);
+                mIvDownload = findViewById(R.id.download);
+                mRvMainLayout = findViewById(R.id.main_layout);
+                mTvAlbumName = findViewById(R.id.album_name);
+                mTvSongName = findViewById(R.id.song_name);
+                mTvAuthorName = findViewById(R.id.author_name);
+                mIvAuthorImage = findViewById(R.id.author_image);
+                drop_down = findViewById(R.id.drop_down);
+                drop_down.setOnClickListener(this);
+
+                mTvSongName.setText(songTitle);
+                mTvAlbumName.setText(songTitle);
+                mTvAuthorName.setText(song_author_name);
+
+                Glide.with(this).load(song_coverImage).into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                            mRvMainLayout.setBackground(resource);
+                        }
+                    }
+                });
+
+                Glide.with(this).load(song_author_image).into(mIvAuthorImage);
+
+
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+                playerUtil.setPlayerListener(new PlayerUtil.PlayerListener() {
+                    @Override
+                    public void onSeekProcessed() {
+
+                    }
+
+                    @Override
+                    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                        if (playbackState == Player.STATE_BUFFERING) {
+
+                            progressBar.setVisibility(View.VISIBLE);
+
+                        } else if (playbackState == Player.STATE_READY) {
+
+                            progressBar.setVisibility(View.GONE);
+
+
+                        }
+                    }
+                });
+
+
+                playerView.setPlayer(playerUtil.simpleExoPlayer);
+                playerView.setKeepScreenOn(true);
+                //  playerUtil.simpleExoPlayer.setPlayWhenReady(true);
+                simpleExoPlayer = playerUtil.simpleExoPlayer;
+
+
+                mIvEqualizer = (ImageView) playerView.findViewById(R.id.equalizer);
+                mIvStop = (ImageView) playerView.findViewById(R.id.stop);
+                mIvStop.setOnClickListener(this);
+                mIvShare = (ImageView) findViewById(R.id.share);
+                song_like = (ImageView) findViewById(R.id.song_like);
+                mIvShare.setOnClickListener(this);
+                mIvDownload.setOnClickListener(this);
+                song_like.setOnClickListener(this);
+
+                if (songsPojoObject.isIs_user_fav()) {
+                    song_like.setImageDrawable(AudioPlayerViewActivity.this.getResources().getDrawable(R.drawable.music_like));
+
+                } else {
+                    song_like.setImageDrawable(AudioPlayerViewActivity.this.getResources().getDrawable(R.drawable.like));
+
+                }
+
+//                playerUtil.stopPlayer();
+
+                //fadeSong();
+                PlayerUtil playerUtil1 = PlayerUtil.getInstance(this, "");
+                playerUtil1.fadeSong();
+            } else {
+                // getAllSongs(album_id);
+            }
+
+
+        } else if (getIntent().hasExtra("duration")) {
+
+            int album_id = getIntent().getIntExtra("duration_category", 0);
+            Log.e("coming_from", "setDuration--------" + " " + album_id);
+
+            getAllSongs(String.valueOf(album_id));
+        } else {
+
+            playNormalSong();
+        }
+    }
+
+    private void playNormalSong() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(perms, permsRequestCode);
         }
 
         PlayerUtil playerUtil = PlayerUtil.getInstance(this, song_audio_url);
-
 
         songsPojoObject = playerUtil.getSongsPojo();
         songId = songsPojoObject.getId();
@@ -214,7 +376,6 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //     audioUrl= Uri.parse(song_audio_url);
 
         playerUtil.setPlayerListener(new PlayerUtil.PlayerListener() {
             @Override
@@ -236,35 +397,12 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
                 }
             }
         });
-        //  playerUtil.setAudio_Url(song_audio_url);
+
 
         playerView.setPlayer(playerUtil.simpleExoPlayer);
         playerView.setKeepScreenOn(true);
         playerUtil.simpleExoPlayer.setPlayWhenReady(true);
         simpleExoPlayer = playerUtil.simpleExoPlayer;
-
-//        LoadControl loadControl= new DefaultLoadControl();
-//
-//        BandwidthMeter bandwidthMeter=  new DefaultBandwidthMeter();
-//
-//        TrackSelector trackSelector= new DefaultTrackSelector(new AdaptiveTrackSelection.Factory(bandwidthMeter));
-//
-//        simpleExoPlayer= ExoPlayerFactory.newSimpleInstance(AudioPlayerViewActivity.this,trackSelector,loadControl);
-//
-//        DefaultHttpDataSourceFactory factory= new DefaultHttpDataSourceFactory("exoplayer_video");
-//
-//        ExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
-//
-//        MediaSource mediaSource= new ExtractorMediaSource(audioUrl,factory,extractorsFactory,null,null);
-//
-//        playerView.setPlayer(simpleExoPlayer);
-//        playerView.setKeepScreenOn(true);
-//        simpleExoPlayer.prepare(mediaSource);
-//        simpleExoPlayer.setPlayWhenReady(true);
-//
-//
-//        simpleExoPlayer.setRepeatMode(Player.REPEAT_MODE_ALL);
-
 
         mIvEqualizer = (ImageView) playerView.findViewById(R.id.equalizer);
         mIvStop = (ImageView) playerView.findViewById(R.id.stop);
@@ -275,7 +413,6 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
         mIvDownload.setOnClickListener(this);
         song_like.setOnClickListener(this);
 
-
         if (songsPojoObject.isIs_user_fav()) {
             song_like.setImageDrawable(AudioPlayerViewActivity.this.getResources().getDrawable(R.drawable.music_like));
 
@@ -284,89 +421,234 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
 
         }
 
-
-//        simpleExoPlayer.addListener(new Player.EventListener() {
-//            @Override
-//            public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
-//
-//            }
-//
-//            @Override
-//            public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
-//
-//            }
-//            @Override
-//            public void onLoadingChanged(boolean isLoading) {
-//
-//            }
-//
-//            @Override
-//            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-//
-//                if (playbackState == Player.STATE_BUFFERING) {
-//
-//                    progressBar.setVisibility(View.VISIBLE);
-//
-//                } else if (playbackState == Player.STATE_READY) {
-//
-//                    progressBar.setVisibility(View.GONE);
-//
-//                    Intent intent = new Intent(AudioPlayerViewActivity.this,SoundService.class);
-//                    intent.setAction(MusicConstants.ACTION.START_ACTION);
-//                    startService(intent);
-//
-//                }
-//
-//                else if(playbackState == Player.STATE_IDLE){
-//
-//                    Intent intent = new Intent(AudioPlayerViewActivity.this,SoundService.class);
-//                    intent.setAction(MusicConstants.ACTION.PAUSE_ACTION);
-//                    startService(intent);
-//
-//                }
-//
-//                else if(playbackState == Player.STATE_ENDED){
-//
-//                    Intent intent = new Intent(AudioPlayerViewActivity.this,SoundService.class);
-//                    intent.setAction(MusicConstants.ACTION.STOP_ACTION);
-//                    startService(intent);
-//
-//                }
-//            }
-//                @Override
-//                public void onRepeatModeChanged(int repeatMode) {
-//
-//                }
-//
-//                @Override
-//                public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
-//
-//                }
-//
-//                @Override
-//                public void onPlayerError(ExoPlaybackException error) {
-//
-//                }
-//
-//                @Override
-//                public void onPositionDiscontinuity(int reason) {
-//
-//                }
-//
-//                @Override
-//                public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
-//
-//                }
-//
-//                @Override
-//                public void onSeekProcessed() {
-//
-//                }
-//            });
-
         if (getIntent().hasExtra("adapter")) {
             songDetailApi();
             Log.e("adapter", "adapter");
+        }
+    }
+
+    public void fadeSong() {
+
+
+        countDownTimer = new CountDownTimer(15000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                Log.e("STATUS", "COUNTER");
+                //here you can have your logic to set text to edittext
+                int progress = (int) (millisUntilFinished / 1000);
+                PlayerUtil playerUtil = PlayerUtil.getInstance(AudioPlayerViewActivity.this, "");
+                simpleExoPlayer = playerUtil.simpleExoPlayer;
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                int vol = audioManager.getStreamVolume(simpleExoPlayer.getAudioStreamType());
+                Log.e("progress", String.valueOf(progress));
+                Log.e("volume", String.valueOf(vol));
+                //  int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float percent = 0.7f;
+                int seventyVolume = (int) (maxVolume * percent);
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+
+            }
+
+            public void onFinish() {
+                Toast.makeText(AudioPlayerViewActivity.this, "Done!", Toast.LENGTH_SHORT).show();
+                PlayerUtil.getInstance(AudioPlayerViewActivity.this, null).stopPlayer();
+                finish();
+            }
+        }.start();
+//        new CountDownTimer(15000, 1000) {
+//
+//            public void onTick(long millisUntilFinished) {
+//                Log.e("STATUS", "COUNTER");
+//                //here you can have your logic to set text to edittext
+//                int progress = (int) (millisUntilFinished / 1000);
+//                PlayerUtil playerUtil = PlayerUtil.getInstance(AudioPlayerViewActivity.this, "");
+//                simpleExoPlayer = playerUtil.simpleExoPlayer;
+//                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+//                int vol = audioManager.getStreamVolume(simpleExoPlayer.getAudioStreamType());
+//                Log.e("progress", String.valueOf(progress));
+//                Log.e("volume", String.valueOf(vol));
+//                //  int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+//                int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+//                float percent = 0.7f;
+//                int seventyVolume = (int) (maxVolume * percent);
+//                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+//
+//            }
+//
+//            public void onFinish() {
+//                Toast.makeText(AudioPlayerViewActivity.this, "Done!", Toast.LENGTH_SHORT).show();
+//                PlayerUtil.getInstance(AudioPlayerViewActivity.this, null).stopPlayer();
+//            }
+//
+//        }.start();
+    }
+
+
+    private void getAllSongs(String album_id) {
+
+        try {
+            Utility utility = Utility.getInstance(this);
+
+            utility.showLoading(getString(R.string.please_wait));
+            APIInterface apiInterface = APIClient.getClient(this).create(APIInterface.class);
+            Log.e("parametrs_album", album_id);
+            Call<RestResponse<DataPojo>> callApi = apiInterface.getSongList(Integer.parseInt(album_id));
+            callApi.enqueue(new Callback<RestResponse<DataPojo>>() {
+                @Override
+                public void onResponse(Call<RestResponse<DataPojo>> call, Response<RestResponse<DataPojo>> response) {
+                    utility.hideLoading();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(perms, permsRequestCode);
+                    }
+
+
+                    Log.e("response_msg", String.valueOf(response.code()));
+
+                    if (response.code() == 200) {
+
+                        DataPojo dataPojo = response.body().data();
+
+                        list.addAll(dataPojo.getCategoryPojoArrayList().get(0).getSongs());
+
+
+                        setSongs(list.get(0));
+
+
+                    } else {
+                        Toast.makeText(AudioPlayerViewActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<RestResponse<DataPojo>> call, Throwable t) {
+                    Log.e("exception_msg", t.getMessage());
+                    utility.hideLoading();
+
+                }
+            });
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
+
+
+    public void setSongs(songsPojo songsPojo) {
+        try {
+            PlayerUtil playerUtil = PlayerUtil.getInstance(this, songsPojo.getAudios());
+            playerUtil.stopPlayer();
+            playerUtil.clearInstance();
+            playerUtil = PlayerUtil.getInstance(this, songsPojo.getAudios());
+            playerUtil.setSongsPojo(songsPojo);
+
+            Log.e("selected_index", String.valueOf(selected_index));
+
+            playerUtil.setContextParams(list, this);
+
+            songsPojoObject = playerUtil.getSongsPojo();
+            songId = songsPojoObject.getId();
+            songTitle = songsPojoObject.getTitle();
+            // albumTitle = getIntent().getStringExtra(Constants.ALBUM_TITILE);
+            songDescription = songsPojoObject.getDescription();
+            song_coverImage = songsPojoObject.getCover_images();
+            song_duration = songsPojoObject.getSongs_length();
+            song_audio_url = songsPojoObject.getAudios();
+            song_author_name = songsPojoObject.getAuthor_name();
+            song_author_image = songsPojoObject.getAuthor_image();
+
+            if (playerView == null) {
+                playerView = findViewById(R.id.player_view);
+                progressBar = findViewById(R.id.progress_bar);
+                mIvDownload = findViewById(R.id.download);
+                mRvMainLayout = findViewById(R.id.main_layout);
+                mTvAlbumName = findViewById(R.id.album_name);
+                mTvSongName = findViewById(R.id.song_name);
+                mTvAuthorName = findViewById(R.id.author_name);
+                mIvAuthorImage = findViewById(R.id.author_image);
+                drop_down = findViewById(R.id.drop_down);
+                drop_down.setOnClickListener(this);
+
+            }
+
+
+            mTvSongName.setText(songTitle);
+            mTvAlbumName.setText(songTitle);
+            mTvAuthorName.setText(song_author_name);
+
+            Glide.with(this).load(song_coverImage).into(new SimpleTarget<Drawable>() {
+                @Override
+                public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                        mRvMainLayout.setBackground(resource);
+                    }
+                }
+            });
+
+            Glide.with(this).load(song_author_image).into(mIvAuthorImage);
+
+
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+            playerUtil.setPlayerListener(new PlayerUtil.PlayerListener() {
+                @Override
+                public void onSeekProcessed() {
+
+                }
+
+                @Override
+                public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+                    if (playbackState == Player.STATE_BUFFERING) {
+
+                        progressBar.setVisibility(View.VISIBLE);
+
+                    } else if (playbackState == Player.STATE_READY) {
+
+                        progressBar.setVisibility(View.GONE);
+
+
+                    }
+                }
+            });
+
+
+            playerView.setPlayer(playerUtil.simpleExoPlayer);
+            playerView.setKeepScreenOn(true);
+            playerUtil.simpleExoPlayer.setPlayWhenReady(true);
+            simpleExoPlayer = playerUtil.simpleExoPlayer;
+
+
+            // TODO: 16-09-2021 this 2 line code is added whenuser come in this screen audio will be full by default
+
+            AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 15, 0);
+
+            // TODO: 16-09-2021 this 2 line code is added whenuser come in this screen audio will be full by default
+
+
+            mIvEqualizer = (ImageView) playerView.findViewById(R.id.equalizer);
+            mIvStop = (ImageView) playerView.findViewById(R.id.stop);
+            mIvStop.setOnClickListener(this);
+            mIvShare = (ImageView) findViewById(R.id.share);
+            song_like = (ImageView) findViewById(R.id.song_like);
+            mIvShare.setOnClickListener(this);
+            mIvDownload.setOnClickListener(this);
+            song_like.setOnClickListener(this);
+
+            if (songsPojoObject.isIs_user_fav()) {
+                song_like.setImageDrawable(AudioPlayerViewActivity.this.getResources().getDrawable(R.drawable.music_like));
+
+            } else {
+                song_like.setImageDrawable(AudioPlayerViewActivity.this.getResources().getDrawable(R.drawable.like));
+
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
     }
 
@@ -442,10 +724,9 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
                     boolean permission1 = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean permission2 = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
-                    if (permission1 && permission2)
-
-                        Snackbar.make(mRvMainLayout, "Permission Granted, Now you can access Storage.", Snackbar.LENGTH_LONG).show();
-                    else {
+                    if (permission1 && permission2) {
+                        // Snackbar.make(mRvMainLayout, "Permission Granted, Now you can access Storage.", Snackbar.LENGTH_LONG).show();
+                    } else {
 
                         //  requestPermission();
                         Snackbar.make(mRvMainLayout, "Permission Denied, You cannot access Storage.", Snackbar.LENGTH_LONG).show();
@@ -496,6 +777,8 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
     protected void onDestroy() {
         super.onDestroy();
 
+        Log.e("onDestroy", "Audio_player");
+
 //        simpleExoPlayer.setPlayWhenReady(false);
 //        simpleExoPlayer.getPlaybackState();
 //        Intent intent = new Intent(AudioPlayerViewActivity.this,SoundService.class);
@@ -507,7 +790,10 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.stop:
+                PlayerUtil playerUtil = PlayerUtil.getInstance(this, null);
+                playerUtil.stopPlayer();
                 simpleExoPlayer.seekTo(0);
+
 
                 break;
             case R.id.share:

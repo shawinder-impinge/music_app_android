@@ -341,7 +341,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     SharedPreference.savePreferenceData(LoginActivity.this, PreferenceData.USERNAME, response.body().getUsername());
                     SharedPreference.savePreferenceData(LoginActivity.this, PreferenceData.LOGIN_TYPE_USED, PreferenceData.LOGIN_TYPE.STANDARD.name());
 
-                    Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Login successfully", Toast.LENGTH_SHORT).show();
+
                     redirectToPersonalizedScreen();
                 } else {
                     utility.hideLoading();

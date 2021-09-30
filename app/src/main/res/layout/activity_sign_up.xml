@@ -1,259 +1,283 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".activities.SignUpActivity">
 
-
-    <include layout="@layout/my_video_background" />
-
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="@dimen/margin150"
-        android:layout_height="@dimen/margin100"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_30"
-        android:src="@drawable/logo_blue" />
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
-        android:layout_marginTop="@dimen/margin_30"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/username_lay"
+        <include layout="@layout/my_video_background" />
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:background="@drawable/cornor"
-            android:gravity="center_vertical"
-            android:padding="@dimen/margin_10">
-
-
-            <ImageView
-                android:id="@+id/iv_user"
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
-                android:layout_centerVertical="true"
-                android:src="@drawable/username" />
-
-            <EditText
-                android:id="@+id/et_username"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:fillViewport="true">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_5"
-                android:layout_toEndOf="@+id/iv_user"
-                android:background="@null"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Username"
-                android:includeFontPadding="false"
-                android:lineSpacingExtra="0dp"
-                android:padding="@dimen/margin_5"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="@dimen/margin150"
+                    android:layout_height="@dimen/margin100"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:src="@drawable/logo_blue" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/logo"
+                    android:layout_marginTop="@dimen/margin_30"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/username_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/margin_30"
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:background="@drawable/cornor"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin_10">
 
 
-        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/iv_user"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/username" />
 
-        <RelativeLayout
-            android:id="@+id/email_lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:background="@drawable/cornor"
-            android:gravity="center_vertical"
-            android:padding="@dimen/margin_10">
-
-
-            <ImageView
-                android:id="@+id/iv_email"
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
-                android:layout_centerVertical="true"
-                android:src="@drawable/mail" />
-
-            <EditText
-                android:id="@+id/et_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_5"
-                android:layout_toEndOf="@+id/iv_email"
-                android:background="@null"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Email"
-                android:includeFontPadding="false"
-                android:lineSpacingExtra="0dp"
-                android:padding="@dimen/margin_5"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                        <EditText
+                            android:id="@+id/et_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_5"
+                            android:layout_toEndOf="@+id/iv_user"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Username"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:padding="@dimen/margin_5"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white" />
 
 
-        </RelativeLayout>
+                    </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/password_lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:background="@drawable/cornor"
-            android:gravity="center_vertical"
-            android:padding="@dimen/margin_10">
-
-
-            <ImageView
-                android:id="@+id/iv_pass"
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
-                android:layout_centerVertical="true"
-                android:src="@drawable/password" />
-
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_5"
-                android:layout_toEndOf="@+id/iv_pass"
-                android:background="@null"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Password"
-                android:includeFontPadding="false"
-                android:inputType="textPassword"
-                android:lineSpacingExtra="0dp"
-                android:padding="@dimen/margin_5"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                    <RelativeLayout
+                        android:id="@+id/email_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_30"
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:background="@drawable/cornor"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin_10">
 
 
-        </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/iv_email"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/mail" />
 
-        <RelativeLayout
-            android:id="@+id/confirm_pass_lay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_20"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:background="@drawable/cornor"
-            android:gravity="center_vertical"
-            android:padding="@dimen/margin_10">
-
-
-            <ImageView
-                android:id="@+id/iv_confirm_pass"
-                android:layout_width="@dimen/margin_25"
-                android:layout_height="@dimen/margin_25"
-                android:layout_centerVertical="true"
-                android:src="@drawable/password" />
-
-            <EditText
-                android:id="@+id/et_conf_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_5"
-                android:layout_toEndOf="@+id/iv_confirm_pass"
-                android:background="@null"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="Confirm Password"
-                android:includeFontPadding="false"
-                android:inputType="textPassword"
-                android:lineSpacingExtra="0dp"
-                android:padding="@dimen/margin_5"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                        <EditText
+                            android:id="@+id/et_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_5"
+                            android:layout_toEndOf="@+id/iv_email"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Email"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="0dp"
+                            android:padding="@dimen/margin_5"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white" />
 
 
-        </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/password_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_30"
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:background="@drawable/cornor"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin_10">
 
 
-        <TextView
-            android:id="@+id/signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/welcome_description"
-            android:layout_marginStart="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_30"
-            android:layout_marginEnd="@dimen/margin_20"
-            android:background="@drawable/cornor_bg"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:lineSpacingExtra="0dp"
-            android:padding="@dimen/margin_15"
-            android:text="SIGN UP"
-            android:textColor="@color/white"
-            android:textSize="@dimen/large_text" />
+                        <ImageView
+                            android:id="@+id/iv_pass"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/password" />
 
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin_30"
-        android:gravity="center_horizontal">
-
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/margin_20"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:text="Already have an account? "
-            android:textColor="@color/white"
-            android:textSize="@dimen/large_text" />
-
-        <TextView
-            android:id="@+id/already_have_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/margin_20"
-            android:layout_toEndOf="@+id/tv1"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:text="Login"
-            android:textColor="@color/white"
-            android:textSize="@dimen/large_text" />
-
-        <TextView
-            android:id="@+id/tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/margin_20"
-            android:layout_toEndOf="@+id/already_have_account"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:text=" here"
-            android:textColor="@color/white"
-            android:textSize="@dimen/large_text" />
+                        <EditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_5"
+                            android:layout_toEndOf="@+id/iv_pass"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Password"
+                            android:includeFontPadding="false"
+                            android:inputType="textPassword"
+                            android:lineSpacingExtra="0dp"
+                            android:padding="@dimen/margin_5"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white" />
 
 
-    </RelativeLayout>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/confirm_pass_lay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_30"
+                        android:layout_marginTop="@dimen/margin_20"
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:background="@drawable/cornor"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/margin_10">
 
 
-</RelativeLayout>
+                        <ImageView
+                            android:id="@+id/iv_confirm_pass"
+                            android:layout_width="@dimen/margin_25"
+                            android:layout_height="@dimen/margin_25"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/password" />
+
+                        <EditText
+                            android:id="@+id/et_conf_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_5"
+                            android:layout_toEndOf="@+id/iv_confirm_pass"
+                            android:background="@null"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="Confirm Password"
+                            android:includeFontPadding="false"
+                            android:inputType="textPassword"
+                            android:lineSpacingExtra="0dp"
+                            android:padding="@dimen/margin_5"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textColorHint="@color/white" />
+
+
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/signup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/welcome_description"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/margin_30"
+                        android:layout_marginTop="@dimen/margin_30"
+                        android:layout_marginEnd="@dimen/margin_30"
+                        android:background="@drawable/cornor_bg"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="0dp"
+                        android:padding="@dimen/margin_15"
+                        android:text="SIGN UP"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/large_text" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/margin_30"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/tv1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/margin_20"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="bottom"
+                        android:text="Already have an account? "
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/large_text" />
+
+                    <TextView
+                        android:id="@+id/already_have_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/margin_20"
+                        android:layout_toEndOf="@+id/tv1"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="bottom"
+                        android:text="Login"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/large_text" />
+
+                    <TextView
+                        android:id="@+id/tv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="@dimen/margin_20"
+                        android:layout_toEndOf="@+id/already_have_account"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="bottom"
+                        android:text=" here"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/large_text" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+
+
+
+    </FrameLayout>
+
+
+</LinearLayout>

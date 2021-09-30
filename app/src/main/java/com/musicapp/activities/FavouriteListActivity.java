@@ -95,7 +95,7 @@ public class FavouriteListActivity extends AppCompatActivity {
                         }
 
 
-                        Toast.makeText(FavouriteListActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FavouriteListActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(FavouriteListActivity.this, response.message(), Toast.LENGTH_SHORT).show();
 

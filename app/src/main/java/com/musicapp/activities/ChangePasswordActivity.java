@@ -110,6 +110,8 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
                         et_old_pass.setText("");
                         et_cp.setText("");
 
+                        Toast.makeText(context, "Password changed successfully", Toast.LENGTH_SHORT).show();
+
                     } else {
                         utility.hideLoading();
                     }

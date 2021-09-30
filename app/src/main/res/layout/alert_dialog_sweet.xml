@@ -17,7 +17,7 @@
         android:padding="@dimen/margin_10"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:text="SOUL" />
+        android:text="ALERT" />
 
     <View
         android:layout_width="match_parent"

@@ -141,7 +141,7 @@ public class AlbumActivity extends PlayerBaseActivity {
                         }
 
 
-                        Toast.makeText(AlbumActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(AlbumActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(AlbumActivity.this, response.message(), Toast.LENGTH_SHORT).show();
 

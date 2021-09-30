@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chivorn.smartmaterialspinner.SmartMaterialSpinner;
 import com.ikovac.timepickerwithseconds.TimePicker;
 import com.musicapp.R;
+import com.musicapp.activities.AudioPlayerViewActivity;
 import com.musicapp.activities.StartDurationActivity;
 import com.musicapp.adapter.AlarmSoundAdapter;
 import com.musicapp.models.CategoryModel;
@@ -37,6 +38,7 @@ import com.musicapp.util.Utility;
 import com.musicapp.util.sweetdialog.Alert;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -60,7 +62,7 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
     private Calendar calendar;
     private int mYear, mMonth, mDay, mHour, mMinute, hours, minutes, seconds;
     DatePickerDialog datePickerDialog;
-    String selected_date, utcTime, final_time, current_time;
+    String selected_date, utcTime, final_time, current_time,current_utc_time;
     TimePicker time_picker;
 
 
@@ -83,6 +85,9 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         current_time = df.format(c.getTime());
+        current_utc_time=localToUTC("yyyy-MM-dd HH:mm:ss",current_time);
+
+
     }
 
     private void findId(View view) {
@@ -108,24 +113,31 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
 
                     Log.e("response", String.valueOf(response.code()));
                     if (response.code() == 200) {
-                        spinner_list.addAll(response.body().getData().getCategory());
-                        ArrayAdapter<CategoryModel> adapter = new ArrayAdapter<CategoryModel>(getActivity(), android.R.layout.simple_spinner_item, spinner_list);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        nice_spinner.setAdapter(adapter);
-                        nice_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                CategoryModel user = (CategoryModel) parent.getSelectedItem();
-                                String name = user.getName();
-                                Selected_id = user.getId();
-                                nice_spinner.setHint("");
-                            }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
+                      try {
+                          if (getActivity()!=null){
+                              spinner_list.addAll(response.body().getData().getCategory());
+                              ArrayAdapter<CategoryModel> adapter = new ArrayAdapter<CategoryModel>(getActivity(), android.R.layout.simple_spinner_item, spinner_list);
+                              adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                              nice_spinner.setAdapter(adapter);
+                              nice_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                  @Override
+                                  public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                      CategoryModel user = (CategoryModel) parent.getSelectedItem();
+                                      String name = user.getName();
+                                      Selected_id = user.getId();
+                                      nice_spinner.setHint("");
+                                  }
 
-                            }
-                        });
+                                  @Override
+                                  public void onNothingSelected(AdapterView<?> parent) {
+
+                                  }
+                              });
+                          }
+                      }catch (Exception e){
+                          e.printStackTrace();
+                      }
 
                     } else {
 
@@ -238,7 +250,7 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("user", SharedPreference.fetchPrefenceData(context, PreferenceData.USER_ID));
         hashMap.put("category_id", Selected_id);
-        hashMap.put("current_time", current_time);
+        hashMap.put("current_time", current_utc_time);
         hashMap.put("duration_in_min", String.valueOf(total_minutes));
         hashMap.put("timezone", "UTC");
 
@@ -256,9 +268,11 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
                 if (response.code() == 200) {
 
                     User user = response.body().data();
+                    Log.e("userrrrrrrrrrrr",response.body().toString());
 
                     utility.hideLoading();
-                    getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
+                  //  getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
+                    getActivity().startActivity(new Intent(getActivity(), AudioPlayerViewActivity.class).putExtra("duration","").putExtra("duration_category",Selected_id));
 
                 } else {
                     utility.hideLoading();
@@ -273,6 +287,32 @@ public class SetDurationFragment extends Fragment implements View.OnClickListene
 
             }
         });
+    }
+
+
+
+
+    public static String localToUTC(String dateFormat, String datesToConvert) {
+
+
+        String dateToReturn = datesToConvert;
+
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        sdf.setTimeZone(TimeZone.getDefault());
+        Date gmt = null;
+
+        SimpleDateFormat sdfOutPutToSend = new SimpleDateFormat(dateFormat);
+        sdfOutPutToSend.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        try {
+
+            gmt = sdf.parse(datesToConvert);
+            dateToReturn = sdfOutPutToSend.format(gmt);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateToReturn;
     }
 
 

@@ -142,24 +142,31 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
 
                     Log.e("response", String.valueOf(response.code()));
                     if (response.code() == 200) {
-                        spinner_list.addAll(response.body().getData().getCategory());
-                        ArrayAdapter<CategoryModel> adapter = new ArrayAdapter<CategoryModel>(getActivity(), android.R.layout.simple_spinner_item, spinner_list);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        nice_spinner.setAdapter(adapter);
-                        nice_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                CategoryModel user = (CategoryModel) parent.getSelectedItem();
-                                String name = user.getName();
-                                Selected_id = user.getId();
-                                nice_spinner.setHint("");
-                            }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
+                        try {
+                            if (getActivity() != null) {
+                                spinner_list.addAll(response.body().getData().getCategory());
+                                ArrayAdapter<CategoryModel> adapter = new ArrayAdapter<CategoryModel>(getActivity(), android.R.layout.simple_spinner_item, spinner_list);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                nice_spinner.setAdapter(adapter);
+                                nice_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                        CategoryModel user = (CategoryModel) parent.getSelectedItem();
+                                        String name = user.getName();
+                                        Selected_id = user.getId();
+                                        nice_spinner.setHint("");
+                                    }
 
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> parent) {
+
+                                    }
+                                });
                             }
-                        });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     } else {
 
@@ -221,7 +228,8 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
                     User user = response.body().data();
 
                     utility.hideLoading();
-                    getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
+                    Toast.makeText(context, "Alarm set successfully", Toast.LENGTH_SHORT).show();
+                    //getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
 
                 } else {
                     utility.hideLoading();
@@ -239,22 +247,22 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
     }
 
 
-    public boolean loadFragment(Fragment fragment, String start_hours, String start_minutes, String start_seconds) {
-        //switching fragment
-        if (fragment != null) {
-            Bundle bundle = new Bundle();
-            bundle.putString("hours", start_hours);
-            bundle.putString("min", start_minutes);
-            bundle.putString("second", start_seconds);
-            fragment.setArguments(bundle);
-            getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.frame_layout, fragment)
-                    .commit();
-            return true;
-        }
-        return false;
-    }
+//    public boolean loadFragment(Fragment fragment, String start_hours, String start_minutes, String start_seconds) {
+//        //switching fragment
+//        if (fragment != null) {
+//            Bundle bundle = new Bundle();
+//            bundle.putString("hours", start_hours);
+//            bundle.putString("min", start_minutes);
+//            bundle.putString("second", start_seconds);
+//            fragment.setArguments(bundle);
+//            getActivity().getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .replace(R.id.frame_layout, fragment)
+//                    .commit();
+//            return true;
+//        }
+//        return false;
+//    }
 
     @Override
     public void onClick(View v) {
@@ -263,13 +271,17 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
 
                 // getActivity().startActivity(new Intent(getActivity(), StartDurationActivity.class));
 
-                if (Selected_id!=0){
-                    callAddAlarmApi();
-                }else {
-                    Alert.showWarningAlert(context,"please select category");
+                if (Selected_id != 0) {
+
+                    if (date_1.getText().toString().equalsIgnoreCase("00:00") || date_2.getText().toString().equalsIgnoreCase("00:00")) {
+                        Alert.showWarningAlert(context, "Please select valid time");
+                    } else {
+                        callAddAlarmApi();
+                    }
+
+                } else {
+                    Alert.showWarningAlert(context, "Please select category");
                 }
-
-
 
 
 //                Log.e("User_id_",SharedPreference.fetchPrefenceData(getActivity(), PreferenceData.USER_ID));
@@ -481,7 +493,52 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
 
 
         if (isFirstDate == true) {
+
+            Calendar datetime = Calendar.getInstance();
+            Calendar c = Calendar.getInstance();
+            datetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            datetime.set(Calendar.MINUTE, minute);
+
             time_one = hourString + ":" + minuteString + ":" + secondString;
+            if (datetime.getTimeInMillis() >= c.getTimeInMillis()) {
+                //it's after current
+                int hour = hourOfDay % 12;
+                date_1.setText(date_one + " " + String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
+                        minute, ":00"));
+            } else {
+                //it's before current'
+                Toast.makeText(getActivity(), "Invalid Time", Toast.LENGTH_LONG).show();
+                date_1.setText("00:00");
+            }
+
+
+            if (date_one != null && time_one != null) {
+                //final_start_time = getDate(date_one + " " + time_one);
+                Log.e("time_simple", date_one + " " + time_one);
+
+                final_start_time = localToUTC("yyyy-MM-dd HH:mm:ss", date_one + " " + time_one);
+
+                Log.e("time_converted", final_start_time);
+            } else {
+                Toast.makeText(context, "Please select valid date & time", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         /*   time_one = hourString + ":" + minuteString + ":" + secondString;
             date_1.setText(date_one + " " + time_one);
 
             if (date_one != null && time_one != null) {
@@ -493,8 +550,12 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
                 Log.e("time_converted",final_start_time);
             } else {
                 Toast.makeText(context, "please select valid date & time", Toast.LENGTH_SHORT).show();
-            }
+            }*/
+
+
             isFirstDate = false;
+
+
         } else if (isSecondDate == true) {
             time_two = hourString + ":" + minuteString + ":" + secondString;
             date_2.setText(date_two + " " + time_two);
@@ -502,12 +563,12 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
             if (date_two != null && time_two != null) {
 
 
-               // final_end_time = getDate(date_two + " " + time_two);
-                final_end_time = localToUTC("yyyy-MM-dd HH:mm:ss",date_two + " " + time_two);
+                // final_end_time = getDate(date_two + " " + time_two);
+                final_end_time = localToUTC("yyyy-MM-dd HH:mm:ss", date_two + " " + time_two);
 
                 Log.e("selected_date_end", final_end_time);
             } else {
-                Toast.makeText(context, "please select valid date & time", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Please select valid date & time", Toast.LENGTH_SHORT).show();
             }
             isSecondDate = false;
         }
@@ -558,6 +619,22 @@ public class EndTimeFragment extends Fragment implements View.OnClickListener, c
         return dateToReturn;
     }
 
+
+    // TODO: 26-09-2021 invalid time code
+
+   /* Calendar datetime = Calendar.getInstance();
+    Calendar c = Calendar.getInstance();
+                    datetime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    datetime.set(Calendar.MINUTE, minute);
+                    if (datetime.getTimeInMillis() >= c.getTimeInMillis()) {
+        //it's after current
+        int hour = hourOfDay % 12;
+        btnPickStartTime.setText(String.format("%02d:%02d %s", hour == 0 ? 12 : hour,
+                minute, hourOfDay < 12 ? "am" : "pm"));
+    } else {
+        //it's before current'
+        Toast.makeText(getApplicationContext(), "Invalid Time", Toast.LENGTH_LONG).show();
+    }*/
 
 
 }

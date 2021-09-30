@@ -5,10 +5,19 @@
 
     <VideoView
         android:id="@+id/videoView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="600dp"
+        android:layout_height="800dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center" />
+
+
+<!--    <VideoView-->
+<!--        android:id="@+id/videoView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_gravity="center" />-->
 
 </RelativeLayout>

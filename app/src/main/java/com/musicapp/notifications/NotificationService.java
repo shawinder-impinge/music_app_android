@@ -18,9 +18,11 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.musicapp.R;
+import com.musicapp.activities.AudioPlayerViewActivity;
 import com.musicapp.activities.DashboardActivity;
 import com.musicapp.util.Utility;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
@@ -32,6 +34,7 @@ public class NotificationService extends FirebaseMessagingService {
     Intent i;
     private static int count = 0;
     PendingIntent pendingIntent;
+    String play_list, user_id, subtype;
 
 
     @Override
@@ -63,11 +66,35 @@ public class NotificationService extends FirebaseMessagingService {
         String type = remoteMessage.getData().get("type");
         String message = remoteMessage.getData().get("body");
         String title = remoteMessage.getData().get("title");
-        sendNotification(title, message, type, "");
+
+
+        // if (type.equalsIgnoreCase("music_alarm_notification")) {
+        try {
+            JSONObject object = new JSONObject(message);
+            play_list = object.getString("songsPlayList");
+            user_id = object.getString("user_id");
+            subtype = object.getString("subtype");
+            Log.e("notification_data", type + "----" + message + "------" + title + "------" + play_list + "----" + user_id);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //  }
+
+        if (type.equalsIgnoreCase("music_alarm_notification")) {
+            sendNotification(title, " ", type, "", play_list, subtype);
+        } else if (type.equalsIgnoreCase("music_duration_notification")) {
+            sendNotification(title, " ", type, "", play_list, subtype);
+        } else {
+            sendNotification(title, message, type, "", play_list, subtype);
+        }
+
+
     }
 
 
-    private void sendNotification(String title, String messageBody, String type, String notification_id) {
+    private void sendNotification(String title, String messageBody, String type, String notification_id, String play_list, String subtype) {
 
         if (type != null) {
 
@@ -92,13 +119,34 @@ public class NotificationService extends FirebaseMessagingService {
                 intent.putExtra("title", title);
                 intent.putExtra("body", messageBody);
                 pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
-            }else if (type.equalsIgnoreCase("music_alarm_notification")) {
+            } else if (type.equalsIgnoreCase("music_alarm_notification")) {
 
-                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+
+                Intent intent = new Intent(getApplicationContext(), AudioPlayerViewActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("pushnotification", "message");
+                intent.putExtra("music_alarm_notification", "message");
                 intent.putExtra("title", title);
-                intent.putExtra("body", "Soul");
+                intent.putExtra("body", messageBody);
+                intent.putExtra("album_id", play_list);
+                if (subtype.equalsIgnoreCase("music_alarm_notification_start")) {
+                    intent.setAction("start");
+
+                } else if (subtype.equalsIgnoreCase("music_alarm_notification_end")) {
+                    intent.setAction("stop");
+                }
+                intent.putExtra("subtype", subtype);
+                pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+            } else if (type.equalsIgnoreCase("music_duration_notification")) {
+
+                Intent intent = new Intent(getApplicationContext(), AudioPlayerViewActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("music_duration_notification", "message");
+                intent.putExtra("title", title);
+                intent.putExtra("body", messageBody);
+                intent.putExtra("album_id", play_list);
+                intent.putExtra("album_id", play_list);
+                intent.setAction("stop");
                 pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
             }

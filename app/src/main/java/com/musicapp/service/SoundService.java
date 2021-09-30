@@ -174,64 +174,9 @@ public class SoundService extends Service implements MediaPlayer.OnErrorListener
         return false;
     }
 
-    private void initPlayer() {
-        mPlayer = new MediaPlayer();
-        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mPlayer.setOnErrorListener(this);
-        mPlayer.setOnPreparedListener(this);
-        mPlayer.setOnBufferingUpdateListener(this);
-        mPlayer.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-            @Override
-            public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                Log.d(TAG, "Player onInfo(), what:" + what + ", extra:" + extra);
-                return false;
-            }
-        });
-        lockWiFi();
-        lockCPU();
-    }
 
 
-    private void initPlayer1() {
-        mPlayer = new MediaPlayer();
-        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mPlayer.setOnErrorListener(this);
-        mPlayer.setOnPreparedListener(this);
-        mPlayer.setOnBufferingUpdateListener(this);
-        mPlayer.setOnInfoListener(new MediaPlayer.OnInfoListener() {
-            @Override
-            public boolean onInfo(MediaPlayer mp, int what, int extra) {
-                Log.d(TAG, "Player onInfo(), what:" + what + ", extra:" + extra);
-                return false;
-            }
-        });
-        lockWiFi();
-        lockCPU();
-    }
 
-    private void play() {
-        try {
-            mHandler.removeCallbacksAndMessages(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        synchronized (mLock) {
-            try {
-                if (mPlayer == null) {
-                    initPlayer();
-                }
-                mPlayer.reset();
-                mPlayer.setVolume(1.0f, 1.0f);
-                mPlayer.setDataSource(this, mUriRadio);
-                mPlayer.prepareAsync();
-
-            } catch (Exception e) {
-                destroyPlayer();
-                e.printStackTrace();
-            }
-        }
-    }
 
     private Notification prepareNotification() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O &&

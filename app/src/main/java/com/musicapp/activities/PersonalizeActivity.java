@@ -161,7 +161,7 @@ public class PersonalizeActivity extends BaseActivity implements View.OnClickLis
                         utility.hideLoading();
 //                    SharedPreference.savePreferenceData(PersonalizeActivity.this, PreferenceData.USER_ID,response.body().getId());
 //                    SharedPreference.savePreferenceData(PersonalizeActivity.this, PreferenceData.TOKEN,user.token);
-                        Toast.makeText(PersonalizeActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(PersonalizeActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                         redirectToDashboard();
                     } else {
                         utility.hideLoading();

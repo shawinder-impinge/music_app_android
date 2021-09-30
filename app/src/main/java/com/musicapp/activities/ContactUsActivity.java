@@ -105,7 +105,7 @@ public class ContactUsActivity extends AppCompatActivity {
 
                         contact_description.setText(Html.fromHtml(privacy_text));
 
-                        Toast.makeText(ContactUsActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(ContactUsActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(ContactUsActivity.this, response.message(), Toast.LENGTH_SHORT).show();
 

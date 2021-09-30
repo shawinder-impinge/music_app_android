@@ -138,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/set"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <RadioButton

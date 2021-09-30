@@ -7,11 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.Player;
 import com.musicapp.R;
 import com.musicapp.fragments.SetDurationFragment;
 import com.musicapp.fragments.EndTimeFragment;
 
-public class MusicLength extends AppCompatActivity implements View.OnClickListener {
+public class MusicLength extends PlayerBaseActivity implements View.OnClickListener {
     private TextView end_time, duration;
 
     @Override

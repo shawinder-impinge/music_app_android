@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
@@ -17,7 +18,9 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -86,6 +89,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     MultipartBody.Part body;
     RequestBody requestFile;
     File mSaveBit;
+    View view;
 
 
     @Override
@@ -100,7 +104,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             root = someView.getRootView();
         }
         setEnable(false);
-        checkPermissionn();
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+            checkPermissionn();
+            takePermissions(view);
+        }else {
+            checkPermissionn();
+        }
+
+
+
         viewProfile();
     }
 
@@ -138,7 +151,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                         }
 
-                        Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
@@ -159,20 +172,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private boolean checkPermissionn() {
         if (Build.VERSION.SDK_INT >= 23) {
-            int hasInternetPermission = checkSelfPermission(Manifest.permission.INTERNET);
             int hasCameraPermission = checkSelfPermission(Manifest.permission.CAMERA);
             int hasReadPermission = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
             int hasWritePermission = checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-            int hasNetworkPermission = checkSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE);
-            int hasaccessCoarseLocation = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
-            int hasAccessFineLocation = checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION);
 
             ArrayList<String> permissionList = new ArrayList<String>();
 
-            if (hasInternetPermission != PackageManager.PERMISSION_GRANTED) {
-                permissionList.add(Manifest.permission.INTERNET);
-            }
+
             if (hasCameraPermission != PackageManager.PERMISSION_GRANTED) {
                 permissionList.add(Manifest.permission.CAMERA);
             }
@@ -182,15 +189,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             if (hasWritePermission != PackageManager.PERMISSION_GRANTED) {
                 permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
-            if (hasNetworkPermission != PackageManager.PERMISSION_GRANTED) {
-                permissionList.add(Manifest.permission.ACCESS_NETWORK_STATE);
-            }
-            if (hasaccessCoarseLocation != PackageManager.PERMISSION_GRANTED) {
-                permissionList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-            }
-            if (hasAccessFineLocation != PackageManager.PERMISSION_GRANTED) {
-                permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            }
+
             if (!permissionList.isEmpty()) {
                 requestPermissions(permissionList.toArray(new String[permissionList.size()]), 2);
                 return false;
@@ -379,7 +378,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                         }
 
-                        Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+
+                        //Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
                     }
@@ -422,10 +423,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 if (resultCode == RESULT_OK & camProfilePic != null) {
                     String path = camProfilePic.getPath();
                     Log.e("CAMERA_PATH", path);
-                    Intent intent = new Intent(this, Croping.class);
-                    intent.putExtra("PROFILE", path);
-                    intent.putExtra("CAMERA", "CAMERA");
-                    startActivityForResult(intent, 303);
+                    setImageafterCrop(path);
+//                    Intent intent = new Intent(this, Croping.class);
+//                    intent.putExtra("PROFILE", path);
+//                    intent.putExtra("CAMERA", "CAMERA");
+//                    startActivityForResult(intent, 303);
                 }
                 break;
 
@@ -434,9 +436,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     Uri uri1 = data.getData();
                     String path1 = getRealPathFromURI(uri1);
                     Log.e("GALLERY_PATH", path1);
-                    Intent intent = new Intent(this, Croping.class);
-                    intent.putExtra("PROFILE", path1);
-                    startActivityForResult(intent, 303);
+                    setImageafterCrop(path1);
+//                    Intent intent = new Intent(this, Croping.class);
+//                    intent.putExtra("PROFILE", path1);
+//                    startActivityForResult(intent, 303);
                 }
                 break;
 
@@ -446,6 +449,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 break;
 
+            case 100:
+
+                if (resultCode == RESULT_OK) {
+                    if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+                        if (Environment.isExternalStorageManager()) {
+                            Toast.makeText(context, "permission granted in 11", Toast.LENGTH_SHORT).show();
+                        } else {
+                            takePermission();
+                        }
+                    }
+                }
+
+                break;
         }
     }
 
@@ -476,27 +492,42 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (grantResults.length > 0) {
+
+            if (requestCode == 101) {
+                boolean readExternalStorage = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                if (readExternalStorage) {
+                    Toast.makeText(context, "Read permission is granted in android 10 or below", Toast.LENGTH_SHORT).show();
+                } else {
+                    takePermission();
+                }
+            }
+
+        }
+
+
         switch (requestCode) {
             case 2:
                 for (String permission : permissions) {
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-                        Alert.showLog("denied", permission);
-                    } else {
-                        if (ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
-                            Alert.showLog("allowed", permission);
-                        } else {
-                            if (count_request_popup == 0) {
-                                count_request_popup = count_request_popup + 1;
-                                Alert.setOnOKClickListner(new Alert.OnOKClickListner() {
-                                    @Override
-                                    public void onOK(boolean yes) {
-                                        count_request_popup = 0;
-                                    }
-                                });
-                                Alert.showWarningAlertWithResponse(context, getString(R.string.never_ask_again));
-                            }
-                        }
-                    }
+//                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
+//                        Alert.showLog("denied", permission);
+//                    } else {
+//                        if (ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
+//                            Alert.showLog("allowed", permission);
+//                        } else {
+//                            if (count_request_popup == 0) {
+//                                count_request_popup = count_request_popup + 1;
+//                                Alert.setOnOKClickListner(new Alert.OnOKClickListner() {
+//                                    @Override
+//                                    public void onOK(boolean yes) {
+//                                        count_request_popup = 0;
+//                                    }
+//                                });
+//                                Alert.showWarningAlertWithResponse(context, getString(R.string.never_ask_again));
+//                            }
+//                        }
+//                    }
                 }
                 break;
         }
@@ -545,6 +576,42 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             isPanelShown = true;
         } else {
             closePanel();
+        }
+    }
+
+
+    public void takePermission() {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+            try {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                intent.addCategory("android.intent.category.DEFAULT");
+                intent.setData(Uri.parse(String.format("package:%s", getApplicationContext().getPackageName())));
+                startActivityForResult(intent, 100);
+            } catch (Exception e) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent, 100);
+            }
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA}, 101);
+        }
+    }
+
+    private boolean isPermissionGranted() {
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R) {
+            return Environment.isExternalStorageManager();
+        } else {
+            int readInternalStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+            return readInternalStoragePermission == PackageManager.PERMISSION_GRANTED;
+        }
+    }
+
+    public void takePermissions(View view) {
+
+        if (isPermissionGranted()) {
+            Toast.makeText(context, "permission already granted", Toast.LENGTH_SHORT).show();
+        } else {
+            takePermission();
         }
     }
 

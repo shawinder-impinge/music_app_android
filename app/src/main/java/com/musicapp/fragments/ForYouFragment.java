@@ -118,30 +118,34 @@ public class ForYouFragment extends Fragment implements View.OnClickListener {
 
                     Log.e("response", String.valueOf(response.code()));
                     if (response.code() == 200) {
-                        spinner_list.addAll(response.body().getData().getCategory());
+                       try {
+                           if (getActivity()!=null){
+                               spinner_list.addAll(response.body().getData().getCategory());
+                               Selected_id = 1;
+                               callSpinnerApi(Selected_id);
+                               ArrayAdapter<CategoryModel> adapter = new ArrayAdapter<CategoryModel>(getActivity(), android.R.layout.simple_spinner_item, spinner_list);
+                               adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                               nice_spinner.setAdapter(adapter);
+                               nice_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                   @Override
+                                   public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                       CategoryModel user = (CategoryModel) parent.getSelectedItem();
+                                       String name = user.getName();
+                                       Selected_id = user.getId();
+                                       category_text.setText(name);
+                                       nice_spinner.setHint("");
+                                       callSpinnerApi(Selected_id);
+                                   }
 
-                        Selected_id = 1;
-                        callSpinnerApi(Selected_id);
+                                   @Override
+                                   public void onNothingSelected(AdapterView<?> parent) {
 
-                        ArrayAdapter<CategoryModel> adapter = new ArrayAdapter<CategoryModel>(getActivity(), android.R.layout.simple_spinner_item, spinner_list);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        nice_spinner.setAdapter(adapter);
-                        nice_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                CategoryModel user = (CategoryModel) parent.getSelectedItem();
-                                String name = user.getName();
-                                Selected_id = user.getId();
-                                category_text.setText(name);
-                                nice_spinner.setHint("");
-                                callSpinnerApi(Selected_id);
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-
-                            }
-                        });
+                                   }
+                               });
+                           }
+                       }catch (Exception e){
+                           e.printStackTrace();
+                       }
 
                     } else {
 

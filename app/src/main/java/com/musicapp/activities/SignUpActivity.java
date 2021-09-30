@@ -129,7 +129,7 @@ public class SignUpActivity extends BaseActivity implements View.OnClickListener
                         SharedPreference.savePreferenceData(SignUpActivity.this, PreferenceData.TOKEN, user.token);
                         SharedPreference.savePreferenceData(SignUpActivity.this, PreferenceData.USERNAME, response.body().getUsername());
 
-                        Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();
                         replacScreen();
                     } else {
                         Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show();

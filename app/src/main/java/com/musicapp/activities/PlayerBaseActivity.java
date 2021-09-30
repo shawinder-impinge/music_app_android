@@ -188,4 +188,5 @@ public class PlayerBaseActivity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class StartDurationActivity extends AppCompatActivity implements View.OnClickListener {
+public class StartDurationActivity extends PlayerBaseActivity implements View.OnClickListener {
     Context context=this;
     TextView title;
     TickTockView mCountUp;

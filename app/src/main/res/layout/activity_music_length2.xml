@@ -37,10 +37,27 @@
 
     </LinearLayout>
 
+
     <FrameLayout
-        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/top_lay" />
+        android:layout_below="@+id/top_lay"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/top_lay" />
+
+
+
+        <include
+            layout="@layout/bottom_song_layout"
+            android:visibility="gone"
+
+            />
+    </FrameLayout>
+
 
 </RelativeLayout>

@@ -15,6 +15,7 @@ import com.musicapp.fragments.EqualizerFragment;
 import com.musicapp.fragments.MusicFragment;
 import com.musicapp.fragments.SearchFragment;
 import com.musicapp.fragments.SettingFragment;
+import com.musicapp.util.PlayerUtil;
 import com.musicapp.util.PreferenceData;
 import com.musicapp.util.SharedPreference;
 
@@ -66,5 +67,18 @@ public class DashboardActivity extends PlayerBaseActivity {
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        PlayerUtil playerUtil = PlayerUtil.getInstance(this, "");
+//        if (playerUtil!=null){
+//            playerUtil.stopPlayer();
+//            PlayerUtil.clearInstance();
+//        }
+
+        Log.e("onDestroy", "dashboard");
+
     }
 }
