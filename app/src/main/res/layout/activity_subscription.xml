@@ -219,13 +219,13 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/cancel_anytime"
                 android:layout_gravity="center"
-                android:fontFamily="@font/anydore"
+                android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="0dp"
-                android:text="Try 7 days free, then kr 89,000/month"
-                android:textColor="@color/app_color"
-                android:textSize="@dimen/dp25" />
+                android:text="Try Free For 7 Days, Then $34.99/Annually"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp16" />
 
             <TextView
                 android:id="@+id/cancel_anytime2"
@@ -238,7 +238,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="0dp"
-                android:text="Cancel anytime"
+                android:text="Cancel Anytime"
                 android:textColor="@color/app_textcolor"
                 android:textSize="@dimen/large_text" />
 
