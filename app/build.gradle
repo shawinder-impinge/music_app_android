@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+     id 'com.android.application'
 }
 
 android {
@@ -10,14 +10,20 @@ android {
         applicationId "com.impinge.soul"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 3
-        versionName "1.1"
+        versionCode 5
+        versionName "1.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     buildTypes {
         release {
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -59,7 +65,8 @@ dependencies {
     implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
     implementation platform('com.google.firebase:firebase-bom:26.6.0')
 
-    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+   // implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+    implementation 'com.facebook.android:facebook-android-sdk:8.2+'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
 
 //    implementation 'nl.bravobit:android-ffmpeg:1.1.7'

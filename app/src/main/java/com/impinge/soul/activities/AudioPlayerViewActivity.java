@@ -203,6 +203,10 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
                 //fadeSong();
 
                 PlayerUtil playerUtil = PlayerUtil.getInstance(this, null);
+
+                if(playerUtil == null)
+                    return;
+
                 songsPojoObject = playerUtil.getSongsPojo();
                 songId = songsPojoObject.getId();
                 songTitle = songsPojoObject.getTitle();
@@ -267,7 +271,8 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
 
                 playerView.setPlayer(playerUtil.simpleExoPlayer);
                 playerView.setKeepScreenOn(true);
-                playerView.setControllerAutoShow(true);
+                playerView.setControllerAutoShow(false);
+                playerView.showController();
                 //  playerUtil.simpleExoPlayer.setPlayWhenReady(true);
                 simpleExoPlayer = playerUtil.simpleExoPlayer;
 
@@ -295,6 +300,7 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
                 //fadeSong();
                 PlayerUtil playerUtil1 = PlayerUtil.getInstance(this, "");
                 playerUtil1.fadeSong();
+
             }
 
 
@@ -371,7 +377,8 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
 
                 playerView.setPlayer(playerUtil.simpleExoPlayer);
                 playerView.setKeepScreenOn(true);
-                playerView.setControllerAutoShow(true);
+                playerView.setControllerAutoShow(false);
+                playerView.showController();
                 //  playerUtil.simpleExoPlayer.setPlayWhenReady(true);
                 simpleExoPlayer = playerUtil.simpleExoPlayer;
 
@@ -488,8 +495,8 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
 
         playerView.setPlayer(playerUtil.simpleExoPlayer);
         playerView.setKeepScreenOn(true);
-        playerView.setControllerAutoShow(true);
-
+        playerView.setControllerAutoShow(false);
+        playerView.showController();
         playerUtil.simpleExoPlayer.setPlayWhenReady(IS_PAUSE);
         simpleExoPlayer = playerUtil.simpleExoPlayer;
 
@@ -708,7 +715,8 @@ public class AudioPlayerViewActivity extends AppCompatActivity implements View.O
 
             playerView.setPlayer(playerUtil.simpleExoPlayer);
             playerView.setKeepScreenOn(true);
-            playerView.setControllerAutoShow(true);
+            playerView.setControllerAutoShow(false);
+            playerView.showController();
             playerUtil.simpleExoPlayer.setPlayWhenReady(true);
             simpleExoPlayer = playerUtil.simpleExoPlayer;
 

@@ -43,8 +43,10 @@
     <string name="please_select_subscription_option">Please select subscription option</string>
 
 
-    <string name="facebook_app_id">762709784679402</string>
-    <string name="fb_login_protocol_scheme">fb762709784679402</string>
+<!--    <string name="facebook_app_id">762709784679402</string>-->
+    <string name="facebook_app_id">433235327948943</string>
+<!--    <string name="fb_login_protocol_scheme">fb762709784679402</string>-->
+    <string name="fb_login_protocol_scheme">fb433235327948943</string>
     <string name="good_morning">Good Morning</string>
     <string name="no_result_found">No result found</string>
     <string name="time_just_now">Just now</string>

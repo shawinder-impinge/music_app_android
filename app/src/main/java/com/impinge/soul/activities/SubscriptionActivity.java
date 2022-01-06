@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.billingclient.api.AcknowledgePurchaseParams;
 import com.android.billingclient.api.AcknowledgePurchaseResponseListener;
@@ -100,9 +101,13 @@ public class SubscriptionActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.subscribe:
-
+                skuList.clear();
+                skuList.add("soul_012");
+                if (skuList.size() != 0) {
+                    setupBillingClient();
+                }
              //   checkSubscription();
-          showSubscriptionDialognew();
+         // showSubscriptionDialognew();
                 break;
         }
     }
@@ -197,7 +202,7 @@ public class SubscriptionActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
-    private void onLoadProductsClicked() {
+    private void  onLoadProductsClicked() {
 
         Log.e("STATUS", "onLoadProductsClicked");
 
@@ -279,7 +284,19 @@ public class SubscriptionActivity extends BaseActivity implements View.OnClickLi
                         //+"<<purchasedTime>>"+purchases.get(0).getPurchaseTime()+"<<state>>"+purchases.get(0).getPurchaseState());
                         if (billingResult != null && billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
 
+                            try {
+                                Toast.makeText(SubscriptionActivity.this, purchases.get(0).getPurchaseToken() + "----" + skuList.get(0) + " -------", Toast.LENGTH_SHORT).show();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+
                         } else {
+
+                            try {
+                                Toast.makeText(SubscriptionActivity.this, purchases.get(0).getPurchaseToken() + "++++" + skuList.get(0) + "+++++", Toast.LENGTH_SHORT).show();
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
                             //setUserDetails(purchases.get(0).getPurchaseToken(), skuList.get(0));
                         }
 
@@ -374,4 +391,5 @@ public class SubscriptionActivity extends BaseActivity implements View.OnClickLi
         if (allowBackpress)
             super.onBackPressed();
     }
+
 }

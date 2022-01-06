@@ -1,3 +1,4 @@
+
 package com.impinge.soul.activities;
 
 import android.content.Context;
@@ -42,7 +43,7 @@ public class SplashActivity extends BaseActivity {
                 if (TextUtils.isEmpty(SharedPreference.fetchPrefenceData(context, PreferenceData.TOKEN))) {
                     replaceScreen();
                 } else {
-                    Intent i = new Intent(SplashActivity.this, DashboardActivity.class);
+                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
                     overridePendingTransition(R.anim.trans_slide_inleft, R.anim.trans_slide_out_left);
@@ -55,10 +56,8 @@ public class SplashActivity extends BaseActivity {
 
     public void printHashKey() {
 
-
         // Add code to print out the key hash
         try {
-
             PackageInfo info
                     = getPackageManager().getPackageInfo(
                     "com.musicapp",
@@ -77,7 +76,7 @@ public class SplashActivity extends BaseActivity {
         } catch (PackageManager.NameNotFoundException e) {
         } catch (NoSuchAlgorithmException e) {
         }
-    }
+}
 
 
     private void replaceScreen() {

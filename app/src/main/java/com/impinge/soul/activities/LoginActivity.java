@@ -66,7 +66,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     VideoView videoview;
     private EditText et_email, et_password;
     private GoogleApiClient mGoogleSignInClient;
-    private String serverClientId = "1075297276319-8t0pbneb83k12bc19i0lda5a16ev1abr.apps.googleusercontent.com";
+  //  private String serverClientId = "1075297276319-8t0pbneb83k12bc19i0lda5a16ev1abr.apps.googleusercontent.com";
+    private String serverClientId = "1044653181295-i4u2486uq9vnic4upudh8acd5bpj6vkn.apps.googleusercontent.com";
     private CallbackManager callbackManager;
     private LoginButton loginButton;
     private String fcmToken, video_link = "";
@@ -91,6 +92,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private static final String EMAIL = "email";
 
     private void integrateFacebookSignIN() {
+
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
@@ -290,6 +292,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             // Signed in successfully, show authenticated UI.
             //  updateUI(account);
         } catch (ApiException e) {
+            e.printStackTrace();
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             //  Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());

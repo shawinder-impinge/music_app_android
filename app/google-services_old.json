@@ -1,0 +1,84 @@
+{
+  "project_info": {
+    "project_number": "1044653181295",
+    "project_id": "soul-journey-fabdf",
+    "storage_bucket": "soul-journey-fabdf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044653181295:android:18f6e8e3a1c421c517409a",
+        "android_client_info": {
+          "package_name": "com.impinge.soul"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044653181295-9crh8d7dg4663rqn7e86gmfqfgu89c85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe7YxxSTnkRyzZZzkas7EPRxyHpt36R4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044653181295-9crh8d7dg4663rqn7e86gmfqfgu89c85.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1044653181295-vt6qtbenqm0fduluvhvnjm1kdkkt210g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.impinge.soul",
+                "app_store_id": "3748"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044653181295:android:5c02f45a78cc61f617409a",
+        "android_client_info": {
+          "package_name": "com.musicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044653181295-9crh8d7dg4663rqn7e86gmfqfgu89c85.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe7YxxSTnkRyzZZzkas7EPRxyHpt36R4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044653181295-9crh8d7dg4663rqn7e86gmfqfgu89c85.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1044653181295-vt6qtbenqm0fduluvhvnjm1kdkkt210g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.impinge.soul",
+                "app_store_id": "3748"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

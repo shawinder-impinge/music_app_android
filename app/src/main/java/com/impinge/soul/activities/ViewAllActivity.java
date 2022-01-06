@@ -128,7 +128,6 @@ public class ViewAllActivity extends PlayerBaseActivity implements View.OnClickL
 
                         if (most_popular_list.size() > 0) {
                             setAdapter(most_popular_list);
-
                         } else {
                         }
 
